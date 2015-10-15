@@ -1,0 +1,181 @@
+\chapter{Unit circle MVDR ABF}
+\label{ch:ucmvdr}
+The array polynomial is the $z$-transform of the array weights for a
+narrowband planewave beamformer using a ULA as previously discussed in
+\ref{sec:array-poly}. Evaluating the array polynomial on the unit
+circle in the complex plane yields the beampattern. The locations of
+the polynomial zeros on the unit circle indicate the locations of
+beampattern nulls. For planewave signals measured with a ULA, the
+locations of the ensemble MVDR polynomial zeros are constrained on the
+unit circle \cite{steinhardt2004stap,tuladhar2015ucmvdr}. However, the
+SMI MVDR polynomial zeros generally do not fall on the unit
+circle. This chapter presents the unit circle MVDR (UC MVDR) ABF which
+exploits the constraint on the ensemble MVDR polynomial zeros to
+modify the SMI MVDR polynomial zeros. The UC MVDR ABF creates deeper
+notches and lowers sidelobes on average compared to the SMI MVDR ABF
+resulting in better interferer suppression and improved WNG. The first
+part of the chapter presents the UC MVDR algorithm. The second part of
+the chapter presents the numerical experiment results evaluating the
+performance of the UC MVDR ABF. The last part of the chapter discusses
+the UC MVDR ABF implementation in a snapshot deficient scenario and
+the unit circle DMR ABF implementation. In the sequel, the SMI MVDR
+polynomial zeros will be referred to as sample zeros and the ensemble
+MVDR polynomial zeros will be referred to as ensemble zeros.
+
+% ====================
+% ---------------------
+% Algorithm and numerical result discussion included inside "ucmvdr.tex"
+% All content from journal submitted to IEEE
+\input{ucmvdr}
+\input{ucmvdr_results}
+% --------------------
+% ====================
+
+\section{UC MVDR ABF in snapshot deficient case}
+\label{sec:uc-mvdr-snapshot-def}
+This section presents one approach to implement the UC MVDR ABF in a
+snapshot deficient scenario ($L < N$). The UC MVDR algorithm begins by
+initially computing the SMI MVDR weights. However, when snapshot
+deficient the SCM is not invertible and hence SMI MVDR ABF cannot be
+directly implemented as mentioned in Ch.~\ref{ch:lit-rev}. One common
+solution is to apply diagonal loading (DL) to the SCM to make it full
+rank and hence invertible. The SMI MVDR weights are then computed
+using the full rank DL SCM. The DL level can be chosen using one of the
+approaches mentioned in \sect{}\ref{sec:ucbf-perf}. The previous
+section discussed the effect of applying DL on the locations of the
+sample zeros. When the DL level is small enough the
+effect on the SMI MVDR polynomial zero locations is negligible.
+
+In the snapshot deficient scenario, an alternative approach is to
+choose a minimal DL level $\dlmin$ just enough to make the SCM
+invertible and compute the SMI MVDR weights. The SMI MVDR weights
+evaluated using the minimally loaded SCM can be seen as the closest
+approximation to the SMI MVDR weights when just enough snapshots are
+available ($L \approx N$) to obtain a full rank SCM without having to
+apply DL. Following this alternative approach, the proposed
+implementation of the UC MVDR ABF in snapshot deficient case begins
+with a minimally loaded SCM used to compute the SMI MVDR
+ABF. Subsequently the UC MVDR ABF weights are derived by projecting
+the sample zeros onto the unit circle as described
+previously.
+
+\figurename{}~\ref{fig:ucmvdr-snapshot-deficient} evaluates the UC
+MVDR ABF implemented for a $N = 11$ sensor ULA in two snapshot
+deficient cases. The top panel corresponds to the case with $L = 10$
+snapshots and the bottom panel corresponds to the case with $L = 5$
+snapshots. In both panels, the solid magenta curve shows the
+interferer output power ECDF graph for the UC MVDR ABF implemented
+using a minimal DL level \mbox{$\dl_{min} = 10^{-8}$}. The dot-dashed
+red curve shows the interferer output power ECDF graph for the DL MVDR
+ABF. The DL level $\dl$ is chosen to match the average WNG with the UC
+MVDR ABF. As described in \sect{}~\ref{sec:ucbf-perf}, finding the DL
+level for the DL MVDR ABF involves first implementing the UC MVDR ABF
+with minimal DL for all trials and computing the average WNG. The DL
+level for DL MVDR is estimated iteratively to match average WNG
+between the two ABFs. Following this approach, in the top panel use
+$\dl = 0.1080$ and in the bottom panel uses $\dl = 0.5856$ for the DL
+MVDR ABF. Comparison of the ECDF graphs show that in both snapshot
+cases, the UC MVDR ABF exhibits higher probability of suppressing the
+interferer compared to the DL MVDR ABF. This implies even in a
+snapshot deficient case, on average the UC MVDR ABF implemented using
+the minimal DL approach attenuates interferer better than the DL MVDR
+ABF.
+
+\begin{figure*}[!hp]
+  \centering
+  \subfloat[L = 10, $\dl = 0.1080$]
+  {\includegraphics[width=3.5in]{mvdr_dlsmi_uc_ssd_Po_ecdf_N11L10_INR40.pdf}}  
+
+  \subfloat[L = 5, $\dl = 0.5856$]
+  {\includegraphics[width=3.5in]{mvdr_dlsmi_uc_ssd_Po_ecdf_N11L5_INR40.pdf}}
+
+  \caption[ECDF of interferer contributed output power compared
+    between the UC MVDR ABF and the DL MVDR ABF in a snapshot
+    deficient scenario.]{ECDF of interferer contributed output power compared
+    between the UC MVDR ABF and the DL MVDR ABF in a snapshot
+    deficient scenario. Both ABFs are implemented using $N = 11$
+    element ULA and the top panel considers $L = 10$ snapshots while
+    the bottom panel considers $L = 5$ snapshots available to compute
+    SCM. In both cases, the UC MVDR ABF uses a minimal DL
+    ($\dl_{min} = 1e^{-8}$) and the DL MVDR ABF uses a DL level set
+    to match the WNG with the UC MVDR ABF. The UC MVDR }
+  \label{fig:ucmvdr-snapshot-deficient}
+\end{figure*}
+
+\section{ Unit Circle DMR ABF}
+\label{sec:uc-mvdr-dmr}
+As previously noted, the DMR ABF is another practical implementation
+of the MVDR beamformer. The DMR ABF is almost always implemented using
+the SCM. The DMR ABF replaces the SCM in \eqref{eq:mvdr-wt} with the
+structured DMR SCM \eqref{eq:dmr-scm} to compute the DMR ABF
+weights. The ensemble form of the DMR ABF is essentially the MVDR
+beamformer in white background noise. Following a
+similar approach as the UC MVDR ABF, a unit circle DMR (UC DMR) ABF is
+derived by projecting the DMR polynomial zeros on the unit circle. The
+difference from the UC MVDR ABF is that the SCM noise eigenvalues are
+averaged implementing the unit circle constraint.
+  
+\figurename{}~\ref{fig:uc-mvdr-dmr-pout} compares the interferer
+output power ECDF of the UC DMR ABF, the UC MVDR and the SMI MVDR
+ABF. The ABFs are implemented using $N = 11$ sensor ULA and $L = 12$
+snapshots. A single interferer with $40$ dB INR is present at
+direction $\uinter = 3/N$. Knowing that only a single interferer is
+present, the dominant subspace dimension for the DMR SCM equals to
+one. The noise eigenvalue of the DMR SCM is averaged from the $10$
+smallest eigenvalues of the SCM. In
+\figurename{}\ref{fig:uc-mvdr-dmr-pout}, the top panel compares the
+ECDF graphs of the UC MVDR, the UC DMR and the SMI MVDR
+ABFs. Comparisons of the output power ECDF graphs show that the UC
+MVDR ABF and the UC DMR ABF have comparable ability to suppress
+interferer. As expected both the UC MVDR and the UC DMR ABFs perform
+better than the SMI MVDR ABF. The bottom panel shows a scatter plot
+where each dot marker denotes the WNG of the UC MVDR ABF against the
+WNG of the UC DMR ABF. Examining the WNG scatter plot, the WNG of the
+UC MVDR ABF is almost always lower than the WNG of the UC DMR ABF. The
+WNG of the UC MVDR ABF exhibits high variability while the WNG of the
+UC DMR ABF has almost no variability and on average comparable to the
+optimal WNG of $N = 11$. Wage and Buck have shown that in case of a
+signal strong interferer outside the main-lobe, the WNG of the DMR ABF
+has low variability and on average the WNG is close to the optimal WNG
+of $N$\cite{wage2013dmr}. The UC DMR ABF inherits the WNG behavior of
+the DMR ABF. These results indicate that compared to the UC MVDR ABF,
+the UC DMR ABF exhibits similar ability to suppress the interferer
+and a better WNG performance. However, the UC DMR ABF is limited by
+the need to determine the dominant subspace dimension before
+implementing the ABF whereas the UC MVDR ABF is devoid of such prior
+requirements.
+
+\begin{figure}[!hp]
+  \centering
+  \centering
+  \subfloat[]
+  {\includegraphics[width=3.5in]{smi_ucmvdr_ucdmr_Po_ecdf_N11L12_INR40.pdf}}  
+
+  \subfloat[]
+  {\includegraphics[width=3in]{smi_ucmvdr_ucdmr_WNG_scatter_N11L12_INR40.pdf}}
+  \caption[Output power comparison between UC MVDR and UC DMR]{(a)
+    ECDF of the interferer contributed output power compared between
+    the UC MVDR, UC DMR and the SMI MVDR ABFs. (b) Scatter plot of the
+    WNGs of the UC MVDR and UC DMR ABFs. All ABFs are implemented
+    using $N = 11$ sensor ULA and $L = 12$ snapshots. The UC DMR attenuates interferer similarly to the UC MVDR ABF and has superior WNG.}
+  \label{fig:uc-mvdr-dmr-pout}
+\end{figure}
+
+\section{Summary}
+\label{sec:ch3-summary}
+This chapter presents the UC MVDR ABF which projects the SMI MVDR
+polynomial zeros radially on the unit circle to create perfect nulls
+in the beampattern. By moving the sample zeros to the
+unit circle, the UC MVDR zeros satisfy the unit circle constraint on
+the ensemble zeros and creates deeper beampattern notches in the
+interferer directions. In a snapshot deficient scenario the UC MVDR
+ABF is derived from a SMI MVDR ABF evaluated using a minimally loaded
+SCM. Numerical simulations show that the UC MVDR ABF suppresses
+interferer better than both the SMI MVDR and DL MVDR ABF. Comparing
+the WNG of the ABFs shows that on average the UC MVDR ABF has
+higher a WNG than the SMI MVDR. Also, the UC MVDR ABF interferer
+suppression is comparable to the UC DMR ABF. However unlike the DL MVDR ABF and the UC DMR ABF both of which requires choosing a design parameter,
+the UC MVDR is not constrained to such requirements.
+%%% Local Variables:
+%%% TeX-master: "main"
+%%% End:
