@@ -1,0 +1,10 @@
+# LaTeX ignore list
+*.tex~
+*.aux
+*.out
+*.ist
+*.log
+*.rel
+*.acn
+*.org~
+
