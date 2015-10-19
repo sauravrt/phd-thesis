@@ -1,0 +1,312 @@
+\chapter{Double zero MVDR ABF for notch broadening}
+\label{ch:dzmvdr}
+ABFs encounter interferer direction mismatch because of interferer
+motion or limited sample support available to compute the SCM
+\cite{vtree2002oap}. This mismatch results in a loss of interferer
+suppression and degraded output performance. Notch broadening is a
+robust beamforming technique to address interferer mismatch by
+creating wider beampattern notch in the interferer direction. This
+chapter presents a new ABF approach for notch broadening. The double
+zero MVDR (DZ MVDR) ABF exploits the properties of the array
+polynomial zeros to create broad notch in the interferer
+direction. The DZ MVDR ABF assumes using a ULA similarly to the UC
+MVDR ABF, but does not necessarily assume that the observed snapshots are
+plane waves. The first two sections of this chapter introduces the
+interferer mismatch problem and the notch broadening technique for
+robust beamforming. \sect{}~\ref{sec:second-order-zeros} discusses the
+behavior of ABF beampattern in the vicinity of a null.
+\sect{}\ref{sec:double-zero-mvdr} describes the DZ MVDR
+algorithm. \sect{}\ref{sec:results} presents results of experiments
+evaluating the DZ MVDR ABF in both stationary and moving interferer
+scenarios. The DZ MVDR ABF is compared with the SMI MVDR, the DL MVDR
+and the CMT MVDR ABF.
+
+\section{Interferer mismatch}
+\label{sec:interferer-mismatch}
+ABFs place sharp and deep notches in the expected interferer direction
+to suppress interferer power at the output. However in applications
+involving interferer motion or limited snapshot support, the ABFs
+suffer from interferer mismatch, i.e., the expected interferer
+direction is different from the true interferer direction
+\cite{vtree2002oap, riba1997comm, baggeroer1999passive}. Due to this
+mismatch in interferer direction, the ABFs place a deep notch in a
+direction different from the true interferer direction. As a result,
+the ABF produces a shallower notch in the true interferer direction
+which does not sufficiently attenuate the interferer. Hence,
+interferer direction mismatch results in degraded notch depth (ND) in
+the interferer direction and subsequent loss of suppression.
+
+In a dynamic environment, moving interferers may traverse several
+resolution widths during the snapshot averaging interval
+\cite{baggeroer1999passive}. The motion spreads the interferer power
+into multiple eigenvalues of the SCM. The number of dominant
+eigenvalues is approximately equal to the number of resolution width
+($\resW$) traversed by the interferer
+\cite{cox2000mrabf}. Effectively, a single source appears to split
+into multiple spatially separate sources. This source splitting due to
+interferer motion results in interferer direction mismatch when
+implementing the SCM based ABFs. In a snapshot limited scenario
+($L \approx N$), random matrix theory based analysis show that the
+dominant eigenvectors of the SCM are biased estimates of the dominant
+eigenvectors of the ECM \cite{paul2007asymptotics,
+  benaych2011eigen}. When the observed snapshots consist of planewave
+interferers in white background noise, the dominant eigenvectors
+represent the interferers that need to be suppressed
+\cite{vtree2002oap}. However, due to the biased estimate of the
+dominant eigenvectors, an ABF implemented using the SCM suffers from
+the interferer direction mismatch. As discussed above, the interferer
+mismatch leads to degraded notch depth in the interferer direction and
+subsequent loss of interferer power suppression using ABFs.
+
+\section{Notch broadening}
+\label{sec:notch-broadening}
+Beampattern notch broadening is a robust beamforming technique that
+addresses the interferer mismatch problem arising from interferer
+motion and the limited snapshot condition \cite{vtree2002oap}. A broad
+notch in the interferer direction can continue to suppress the
+interferer even in the case of a mismatch. One approach to notch
+broadening is covariance augmentation method which modifies the SCM
+such that the resulting ABF creates broad interferer notches
+\cite[Sec.~6.7.6]{vtree2002oap}. Riba et al. proposed a notch
+broadening technique by modifying the SCM using a 'spreading matrix'
+\cite{riba1997comm}. The beamformer was designed for mobile
+communication environment with fast moving interferers. Zatman and
+Mailloux independently proposed separate but related methods to
+produce broad notches in the MVDR beampattern \cite{zatman1995null,
+  mailloux1995null}. Both methods modify the SCM to introduce a
+cluster of incoherent fictitious sources around each of the original
+interferer direction. The fictitious sources are introduced by
+modifying the SCM prior to computing the MVDR weights. The resulting
+MVDR weights places a null in the vicinity of each fictitious source,
+producing a wide notch region around the interferer direction. Later,
+Guerci combined the two methods under the theory of covariance matrix
+tapering (CMT) for notch broadening \cite{guerci1999cmt}. The CMT
+approach uses a spatially tapered SCM to compute the MVDR ABF weights
+which produces broad notches in the interferer direction. The CMT
+approach for notch broadening is discussed in the next section.
+
+Another approach is to impose constraints on the derivatives of the
+beampattern in the interferer direction
+\cite[Sec.~6.7.1.4]{vtree2002oap}. This approach computes the MVDR ABF
+weights with the constraint of the derivative of the beampattern
+function $\beampatu$ with respect to directional cosine $u$ set to a
+specified value at the interferer direction $\uinter$. The derivative
+constraint forces the beampattern at the interferer directions, i.e.,
+the notches to be flatter and broader. Gershman used the
+derivative constraint approach to produce notch broadening in the MVDR ABF
+beampattern. Gershman's method sets the beampattern derivatives at all
+the interferer directions to zero \cite{gershman1991synthesis}. The
+method does not require \emph{a priori} knowledge of interferer
+direction, however the method assumes either a high power interferer
+or a large number of snapshots available to estimate the SCM
+accurately. Such assumption of large snapshot support is suitable only
+in electromagnetic waves based applications but is unrealistic in most
+passive sonar applications \cite{baggeroer1999passive}.
+
+\subsection{Covariance matrix tapering}
+\label{sec:cmt}
+Guerci proposed the CMT approach for notch broadening in ABF
+beampatterns \cite{guerci1999cmt}. The CMT technique augments the SCM
+using a taper matrix $\taperMat$ to generate the tapered SCM
+$\sampCov_{\rm T} = \sampCov\circ\taperMat$, where $[\circ]$ denotes
+the Hadamard matrix product. The taper matrix $\taperMat$ is a
+positive semi-definite (p.s.d) matrix with all the main diagonal
+entries equal to unity. The p.s.d taper matrix ensures that the
+tapered SCM is also p.s.d and the unity diagonal entries ensures that
+$\tr{\sampCov_{\rm T}} = \tr{\sampCov}$, i.e., the tapering conserves
+the total input power in the SCM. The CMT MVDR ABF weight vector is
+computed by replacing the ECM with the tapered SCM $\sampCov_{\rm T}$
+in \eqref{eq:mvdr-wt}. The ABF weight vector computed using the
+tapered SCM produces broad notches in the interferer direction
+compared to the SMI MVDR ABF. The choice of the taper matrix
+$\taperMat$ determines the shape and width of the broadened notch. The
+simplest choice for the taper matrix $\taperMat$ has the entries,
+\begin{equation}
+  \label{eq:taper-mat}
+[\taperMat]_{mn} = {\rm sinc}((m - n)\cmtW/2)  
+\end{equation}
+where the parameter $\cmtW$ defines the desired notch width in terms
+of directional cosine. Using the taper matrix in \eqref{eq:taper-mat}
+creates a uniform notch of width $\cmtW$ centered at the interferer
+direction. Unlike the Zatman and Mailloux approach, the CMT approach
+does not require prior knowledge of the interferer direction, but it
+requires choosing the notch width parameter $\cmtW$ before
+implementation. The choice of the width parameter depends on the
+application environment which is usually unknown a priori. In a
+passive sonar application scenario, Song suggests that an appropriate
+choice for the notch width is equal to the resolution width for the
+given array aperture, i.e., $\cmtW = 2/(N-1)$ \cite{song2003null}.
+
+\begin{figure}[!ht]
+  \centering
+  \subfloat[]{\includegraphics[width=0.5\textwidth]{cmt_bp.pdf}\label{fig:cmt-bp}}
+
+  \subfloat[]{\includegraphics[width=0.5\textwidth]{cmt_pz.pdf}\label{fig:cmt-pz}}
+
+  \caption{(a) Log-magnitude beampattern and (b) zeros of CMT MVDR ABF using $N = 11$ sensor ULA and steered towards $\ulook = 0$. The CMT notch width $\cmtW = 2/(N-1$). Two interferers are present at directions $\uinter = 3/N$ and $-5/N$ denoted by dashed vertical lines in (a) and dashed radial lines in (b). The CMT MVDR uses four zeros per interferer to create broad notch at the cost of high sidelobes and wider mainlobe.}
+\label{fig:cmt-bp-pz}
+\end{figure}
+
+\figurename{}~\ref{fig:cmt-bp-pz} shows the log-magnitude beampattern
+(top panel) and the polynomial zeros (bottom panel) of a CMT MVDR ABF
+(solid green) implemented using $N = 11$ sensor ULA assuming the ECM
+is known. A CBF beampattern (dotted black) is also shown for
+reference. Two independent interferers are present at $\uinter = 3/N$
+and $-5/N$ respectively as denoted by the vertical dashed lines in
+beampattern and radial dashed lines in zeros plot. The CMT notch width
+is set to $\cmtW = 2/(N-1)$. Examining the beampattern, the CMT MVDR
+ABF produces broad notch at each interferer direction. The notch
+broadening is achieved by clustering multiple beampattern nulls in the
+vicinity of the interferer direction. Equivalently, the associated CMT
+MVDR polynomial zeros cluster in the vicinity of a interferer
+direction, as seen in the zeros plot. For a given interferer strength,
+the number of zeros used to produce the notch broadening depends on
+the notch width parameter $\cmtW$. The wider the notch width
+required, more zeros per interferer are used to produce notch
+broadening. In the \figurename{}~\ref{fig:cmt-pz}, the CMT MVDR ABF is
+using four zeros per interferer to produce broad notches. However, as
+seen in the beampattern the CMT MVDR ABF produces broad notches at the
+cost of high sidelobes and wider mainlobe which reduces the WNG
+[\sect{}~\ref{sec:wng}].
+
+\subsubsection{CMT as spatial modulation}
+\label{sec:cmt-as-spatial}
+
+\srt{Added this section to discuss how eigenanalysis of taper matrix explains the usage of three DoF per interferer when $\cmtW = 2/(N-1)$.}
+
+The CMT approach of augmenting the SCM with the taper matrix
+$\taperMat$ in \eqref{eq:taper-mat} is equivalent to performing
+spatial modulation of the observed snapshots. The spatial modulation
+of the snapshot generates fictitious sources around the planewave
+sources contained in the snapshot. The eigendecomposition of the taper
+matrix is
+$\taperMat = \sum_{n=1}^{N}\eval_n\taperevec_n\taperevec_n\herm$ where
+$\taperevec_n$ is the $n\nth$ eigenvector and $\eval_n$ is the
+associated eigenvalue such that
+$\eval_1 \geq \eval_2 \geq \ldots \eval_N$. The number of significant
+eigenvalues of the taper matrix in \eqref{eq:taper-mat} is
+$\cmtW(N-1)/2 + 1$ \cite{song2003null}. Hence, for a notch width of
+$W = 2/(N-1)$, the taper matrix $\taperMat$ has only two significant
+eigenvalues. Using the eigendecomposition of $\taperMat$, the tapered
+SCM is
+\begin{align*}
+  \sampCov_{T} &= \left( \frac{1}{L}\sum\limits_{\ell = 1}^{L}\datavec_{\ell}\datavec_{\ell}\herm \right) \circ \left( \sum\limits_{n=1}^{N}\eval_n\taperevec_n\taperevec_n\herm \right).\\
+  \intertext{Considering only the two largest eigenvalues $\eval_1$ and $\eval_2$, and rearranging the terms,}
+  \
+   \sampCov_{T} &= \frac{1}{L}\sum\limits_{n=1}^{2}\eval_n\sum\limits_{\ell = 1}^{L}(\datavec_{\ell}\circ\taperevec_n)(\datavec_{\ell}\circ\taperevec_n)\herm\\
+               &= \frac{1}{L}\sum\limits_{n=1}^{2}\eval_n\sum\limits_{\ell = 1}^{L}\modvec_{n\ell}\modvec_{n\ell}\herm \\
+               &= \sum\limits_{n=1}^{2}\eval_n\sampCov_n
+\end{align*}
+where $\modvec_{n\ell} = (\datavec_{\ell}\circ\taperevec_n)$ is the
+$\ell\nth$ snapshot modulated by $\taperevec_n$ and
+$\sampCov_n$ is the SCM obtained by averaging the snapshots modulated
+by $\taperevec_n$ for $n = 1, 2$. Hence, the tapered SCM
+$\sampCov_{T}$ is a combination of $\sampCov_n$ weighted
+by the eigenvalues ($\eval_n$) of the taper matrix.
+
+\figurename{}~\ref{fig:cmt-eigenbeam} shows the magnitude of
+eigenbeams of the first two principal eigenvectors $\taperevec_1$
+(blue) and $\taperevec_2$ (green). The eigenbeam for $\taperevec_1$
+has a single mainlobe in the broad side direction, identical to a CBF
+beampattern steered to the broadside direction. This eigenbeam
+indicates that snapshot modulation by $\taperevec_1$ keeps the
+planewave signal in the snapshot, unchanged. However, the eigenbeam
+for $\taperevec_2$ has two distinct peaks on either side of the
+broadside direction. The two peaks in the eigenbeam indicates that
+snapshot modulation by $\taperevec_2$ produces scaled copies of the
+planewave signal in the snapshot, on either side of the signal
+direction. In effect, the CMT operation using the taper matrix in
+\eqref{eq:taper-mat} introduces a pair of fictitious sources on either
+side of the interferer direction. Hence, an MVDR ABF implemented using
+the tapered SCM $\sampCov_{T}$ places notch on either side of the
+interferer direction, effectively producing broader notch as seen in
+\figurename{}~\ref{fig:cmt-bp}. Consequently, the CMT MVDR ABF using
+notch width $\cmtW = 2/(N-1)$ uses three degree of freedom (DoF) per
+interferer to produce notch broadening.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.8\textwidth]{cmt_eigval_beam.pdf}
+  \caption{Magnitude of eigenbeam for first two principal eigenvectors of taper matrix in \eqn{}\eqref{eq:taper-mat}. The eigenvectors spatially modulate the snapshots to create replica of planewave signal in the snapshot on either side of the signal direction.}
+  \label{fig:cmt-eigenbeam}
+\end{figure}
+
+\section{Properties of the beampattern near a  zero}
+\label{sec:second-order-zeros}
+Evaluating the array polynomial \eqref{eq:beampat-poly} on the unit
+circle $z = e^{j\pi u}$ yields the beampattern in
+\eqref{eq:beampatu}. The array polynomial $\beampolyz{}$ has $N - 1$
+zeros in the complex plane and the zeros that fall on the unit circle
+produce nulls in the beampattern. A first-order zero on the unit
+circle produces a `sharp' null in the beampattern. The beampattern in
+the neighborhood of a first-order null is linear in the directional
+cosine $u$ \cite[Sec.~3.2.3]{vtree2002oap}\cite{Steinberg1976}. In contrast, the
+second-order zeros (SOZ) produce flatter nulls in the beampattern. The
+beampattern in the neighborhood of a second-order null is quadratic in
+directional cosine $u$. \figurename{}~\ref{fig:mvdr-null-zero}
+compares the MVDR beampattern magnitude in the neighborhood of a first-order
+null (blue solid) and a second-order null (red dashed). The SOZ effectively
+imposes a first derivative constraint on the beampattern which forces
+the second-order null to be flatter compared to the sharp first-order
+null.
+
+As previously discussed, the ensemble MVDR beamformer places a
+beampattern null in the neighborhood of the true interferer direction
+to attenuate the interferer. The vertical dashed line in
+\figurename{}~\ref{fig:mvdr-null-zero} denotes the interferer
+direction $\uinter$. The interferer falls on the 'shoulder' of the
+null where the first-order null creates a sharp notch whereas the
+second-order null creates a deeper and broader notch. Any mismatch in
+the interferer direction changes the ND at the interferer direction
+$\uinter$. In case of a mismatch, the ND produced by the first-order
+null exhibits greater variation compared to the second-order null
+due to the linear and quadratic nature of their respective
+beampatterns. As a result, the ND produced by the first-order null is
+more sensitive to interferer direction mismatch compared to the ND
+produced by the second-order null. The DZ MVDR ABF presented in the
+next section exploits this property of a second-order null to produce
+broader notches in the MVDR beampattern.
+
+\begin{figure}[!hp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{interf_single_dbl_zero_beampattern.pdf}
+  \caption{MVDR beampattern magnitude zoomed into the neighborhood of a
+    null. The null location in directional cosine $u$ axis is denoted by
+    the circle marker.  The vertical dashed line indicates the
+    interferer direction. The blue solid curve denotes the first order
+    null produced by the MVDR beamformer. The red dashed curve denotes
+    a second order null in the same location.}
+  \label{fig:mvdr-null-zero}
+\end{figure}
+
+% ==========================================
+% Include files 
+
+\input{dzmvdr}  % algorithm description
+\input{dzmvdr_results}  % result discussion
+% ==========================================
+
+\section{Summary}
+\label{sec:dzmvdr-summary}
+In conclusion, this chapter presents the DZ MVDR ABF which produces
+a broad notch in the beampattern in the interferer direction. The DZ
+MVDR ABF doubles the array polynomial zeros of a subarray SMI MVDR ABF
+to derive the weight vector. The DZ MVDR ABF with the inherent
+subarray processing requires less computation compared to the SMI MVDR
+ABF implemented using same sized ULA. But the gain from subarray
+processing is at the cost of reduced DOF and a wider main-lobe than the
+SMI MVDR or the DL MVDR ABFs. Numerical experiments show that the DZ
+MVDR ABF suppresses interferers better than both the SMI MVDR and the
+DL MVDR ABF in the multiple stationary interferer scenario. Comparison
+of the WNG shows that on average the DZ MVDR ABF has higher WNG making
+it less sensitive to parameter mismatch. In moving interferer
+scenarios, the DZ MVDR ABF performance is comparable to the CMT MVDR
+ABF with the width parameter set equal to the ULA resolution
+width. But the CMT MVDR requires choosing the width parameter while
+the DZ MVDR ABF does not require making prior choice of design
+parameters.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 
