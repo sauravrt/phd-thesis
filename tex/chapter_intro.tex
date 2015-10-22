@@ -1,0 +1,203 @@
+\chapter{Introduction}
+\label{cha:introduction}
+% Broad perspective
+Passive sensor arrays sample propagating signals at spatially discrete
+locations \cite{vtree2002oap,johnson1992array}. Signal processing
+techniques spatially filter the observed data from the sensor
+array to focus on propagating signals from a specified direction of
+interest. Beamforming is the spatial filtering technique which passes
+propagating signals arriving from the direction of interest while
+rejecting noise and interfering signals. Beamforming on propagating
+signals is analogous to bandpass filtering of temporal signals using
+LTI filters. This dissertation focuses on beamforming for narrowband
+planewave signals sampled using uniform linear arrays (ULA).
+
+% Beamforming and ABF
+Beamformers often operate in scenarios where the signal of interest
+exists in the presence of loud interferers and noise, a common
+scenario in passive sonar applications \cite{baggeroer1999passive,
+  song2003null}. Conventional beamformers (CBFs) have limited ability
+to suppress loud interferers which can leak through the high sidelobes
+of the CBF beampattern and mask a weaker signal of interest. Adaptive
+beamformers (ABF) can adjust their response according to the operating
+scenario and pass signals of interest while attenuating interferers
+and noise. ABFs use the knowledge of the data ensemble covariance
+matrix (ECM) to place deep notches in the interferer direction to
+suppress interferer power at output \cite{vtree2002oap}. In practice
+the ECM is usually unknown and it is estimated from the observed
+snapshot data by computing the sample covariance matrix
+(SCM). Practical ABFs are implemented by substituting the SCM for the
+ECM to compute the beamformer weights. The minimum variance distortionless
+(MVDR) beamformer is a commonly used ABF \cite{capon1969mvdr}. The
+practical MVDR beamformer implemented using the SCM is referred to as
+the sample matrix inversion (SMI) MVDR ABF \cite{vtree2002oap}. This
+dissertation focuses on the MVDR ABF for application in the passive sonar
+environment.
+
+% Issues in ABF
+% may need to get in Mestre's work here
+
+The SCM based ABFs rely on averaging a large number of snapshot data
+to obtain a good estimate of the ECM using the SCM \cite{vtree2002oap,
+  reed1974rapid}. Reed et al.\ show that the SMI MVDR ABF requires two
+snapshots per sensor to keep the expected output SINR loss within $3$
+dB of the ensemble output SINR \cite{reed1974rapid}. In practice,
+either source motion or physical constraint due to the use of a large
+array apertures limits the number of snapshots available to compute
+the SCM. In passive sonar applications, it is common for the available
+number of snapshots to be comparable to or even less than the number
+of sensors \cite{baggeroer1999passive}. In such cases, inverting the
+SCM is either unstable or even impossible. An SMI MVDR ABF implemented
+with a limited number of snapshots suffers from beampattern
+distortion, producing high side-lobes and a wider main-lobe
+\cite{richmond96pdfarray,Carlson1988scm}. This beampattern distortion
+results in a loss of capability to attenuate interferers and noise
+power. Furthermore, interferer motion leads to mismatch between the
+ABF notch direction and the true interferer direction resulting in
+degraded interferer suppression \cite{baggeroer1999passive,
+  cox2002adaptive, riba1997comm}.
+
+Diagonal loading the SCM is one approach to address the issue of
+limited or insufficient snapshots. Diagonal loading ensures that the
+SCM is full rank and invertible to compute the MVDR beamformer
+weights. In addition to enabling implementation of the SMI ABF in a
+snapshot deficient scenario, diagonal loading also improves ABF
+robustness against parameter mismatch \cite{vtree2002oap,
+  mestre2005diagonal}. However, choosing an appropriate DL factor
+requires knowledge of the interferer and noise power levels which are
+unknown in practice. Several approaches have been proposed for
+choosing the appropriate diagonal loading factor. Mestre and Lagunas
+introduced a random matrix theory based estimator for the optimal DL
+factor with focus on snapshot limited scenarios. However the procedure for finding the optimal DL factor has significantly higher computational complexity 
+\cite{mestre2006finite}.
+
+Notch broadening is a robust beamforming technique that addresses the
+interferer direction mismatch issue by producing wide notch in the
+beampattern at the interferer direction
+\cite[Sec.~6.7.6]{vtree2002oap}. One approach to notch broadening
+developed by Mailloux \cite{mailloux1995null} and Zatman
+\cite{zatman1995null} augments the SCM such that the resulting ABF
+produces broad notches. The covariance matrix taper (CMT) technique by
+Guerci generalizes the SCM augmentation approach for notch broadening
+\cite{guerci1999cmt}. Another notch broadening approach imposes
+derivative constraints on the beampattern at the interferer direction
+\cite[Sec.~6.7.1.4]{vtree2002oap}. The derivative constraint forces
+the beampattern in the interferer direction to be flatter and hence
+produce wider notch. Gershman et al.\ used the derivative constraint
+approach to produce notch broadening using MVDR ABF
+\cite{gershman1991synthesis}.
+
+Designing a beamformer requires choosing the weights of each sensor to
+obtain a beampattern with desirable properties. For ULAs the
+beampattern can be represented in terms of a polynomial. The
+$z$-transform of the weights for planewave beamformers using a ULA is
+called the beamformer array polynomial \cite{Schelkunoff1943array,
+  vtree2002oap, Steinberg1976}. This is analogous to the system
+function representation of a discrete time (DT) LTI filter by taking
+z-transform of the impulse response. As with DT LTI filters,
+beamformers also have a pole-zero representation in the complex
+plane. Continuing the analogy, the beampattern is obtained by
+evaluating the array polynomial on the unit circle. The array
+polynomial zeros produce notches in the beampattern and the zeros that
+fall on the unit circle produce nulls in the beampattern.
+
+The array polynomial for beamformers has seen limited
+usage in array processing applications. Steinberg discusses the
+polynomial representation of radiation pattern for uniform antenna
+arrays and presents an approach to synthesize radiation patterns by
+manipulating zero locations on the unit circle
+\cite{Steinberg1976}. However, the methods proposed by Steinberg are
+limited to ensemble implementation \cite{Steinberg1976}. The
+Root-MUSIC algorithm for direction-of-arrival (DOA) estimation
+exploits a polynomial representation of the MUSIC power spectrum
+\cite{hwang2008root}. The zero locations of the power spectrum
+polynomial on the unit circle are used to estimate the source
+DOA. Several proposed DT adaptive notch filters constrain the filter
+poles and zeros to render 'sharper' notches in their frequency
+response \cite{Nehorai1985, Friedlander1984notch, Shynk1986}. However
+these approaches are based on DT IIR filters while beamformers with
+ULAs are analogous to DT FIR filters. This dissertation exploits the
+array polynomial representation of MVDR ABF to develop new beamforming
+algorithms.
+
+% The zeros of the ensemble MVDR beamformer array polynomial are
+% constrained to fall on the unit circle
+% \cite{steinhardt2004stap}. However, the sample zeros of the SMI MVDR
+% beamformer array polynomial generally do not fall on the unit
+% circle. This paper develops a new beamformer by radially projecting
+% the SMI MVDR zeros to the unit circle and therefore satisfying the
+% constraint on the ensemble MVDR zeros. The proposed unit circle MVDR
+% (UC MVDR) beamformer suppresses interferers better than the SMI MVDR
+% and the diagonal loaded (DL) MVDR beamformer and at the same time
+% improves white noise gain (WNG) performance.
+
+% The polynomial representation approach from
+% \cite{Schelkunoff1943array} hseen limited use in array processing
+% applications. Root-MUSIC algorithm for direction-of-arrival (DoA)
+% estimation used polynomial representation of the MUSIC power spectrum
+% \cite{hwang2008root}. The zero locations of the power spectrum
+% polynomial on the unit circle are used to estimate the source
+% DOAs. However, unlike UC-MVDR, the polynomial zeros are not modified
+% in Root-MUSIC. Several DT adaptive notch filter designs have been
+% proposed which constrain the pole zero structure to improve filter
+% response. Friedlander presented an IIR filter structure which forces
+% the zeros to be on the unit circle to achieve deeper notches
+% \cite{Friedlander1984notch}. Nehorai presents a pole zero constrained
+% IIR notch filter which can produce sharper notches \cite{Nehorai1985}.
+
+
+\section{Dissertation contribution}
+\label{sec:contributions}
+The contributions of this dissertation are as follows:
+\begin{itemize}
+\item Investigates the array polynomial zero locations for the MVDR
+  beamformer. The work develops a model for the ensemble MVDR
+  polynomial zero locations assuming a single interferer present in
+  white background noise. The model illuminates the trade off balancing
+  the interferer suppression and the white noise gain by the ensemble
+  MVDR to produce the minimum output power.
+
+\item Develops an MVDR ABF algorithm to produce a deeper notch in the
+  beampattern at the interferer direction and simultaneously improve
+  the white noise gain compared to the SMI MVDR ABF. The proposed
+  algorithm forces the SMI MVDR ABF polynomial zeros to satisfy the
+  unit circle constraint on the ensemble MVDR polynomial zeros. The
+  unit circle MVDR beamformer is an improvement over diagonal loading
+  and dominant mode rejection in that the new algorithm does not
+  require an explicit choice of a design parameter.
+
+\item Develops a new approach for notch broadening. The proposed
+  algorithm exploits the properties of the MVDR beampattern near a
+  second order zero combined with subarray processing. The algorithm
+  implicitly identifies the interferer direction and imposes
+  derivative constraint to broad notches by creating second-order
+  zeros. The second-order zeros are generated without explicitly
+  solving for the roots of array polynomial. 
+
+ %  and imposes derivative constraint to to broaden notch. Subarray
+ %  processing
+\end{itemize}
+
+\section{Dissertation outline}
+\label{sec:outline}
+The rest of the dissertation is organized as follows:
+Ch.~\ref{ch:lit-rev} reviews essential background on beamforming using
+sensor arrays, conventional and the adaptive beamformers, and
+discusses several performance metrics. The final portion of the
+chapter introduces the array polynomial representation for planewave
+beamformers using a ULA. Ch.~\ref{ch:mvdr-polyn-zeros} discusses the
+array polynomial representation of the ensemble MVDR ABF, the
+properties of the ensemble zeros, and the SMI MVDR ABF polynomial
+zeros. Ch.~\ref{ch:ucmvdr} introduces the unit circle MVDR ABF
+algorithm and compares its performance to the SMI MVDR and diagonal
+loaded MVDR ABFs. Ch.~\ref{ch:dzmvdr} introduces the double zero MVDR
+ABF algorithm for notch broadening and compares its performance to the
+traditional ABFs and the CMT MVDR ABF. Ch.~\ref{ch:conclusion},
+summarizes the results of this work and discusses potential questions
+the for future investigation.
+	
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
