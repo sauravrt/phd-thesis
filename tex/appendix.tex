@@ -1,0 +1,115 @@
+\chapter{Proof of unit circle constraint on MVDR zeros}
+\label{sec:apdx-mvdr-zeros}
+The ensemble MVDR polynomial zeros are constrained to fall on the unit circle
+for planewave beamforming using a ULA. Steinhardt and Guerci proved this
+constraint on the MVDR ensemble zeros in \cite{steinhardt2004stap},
+but the result does not appear to be widely known. The proof below
+closely follows the Steinhardt and Guerci's proof by contradiction.
+
+The ensemble MVDR weight vector $\wmvdr$ solves the optimization problem in
+\eqref{eq:mvdr-const-prob}. The quadratic objective function in
+\eqref{eq:mvdr-const-prob} is a convex function in $\wt$ because the
+ECM is a positive-definite matrix \cite{vtree2002oap}. This implies a
+unique solution exists for \eqref{eq:mvdr-const-prob}. Using the Parseval's relation (\cite[Sec.~5.4.1.3]{vtree2002oap}), the objective
+function can be expressed in terms of the ensemble input power spectrum
+$\powspec$ and the ensemble MVDR beampattern
+\begin{equation}
+\label{eq:obj-func-spec}
+f(\wt) = \half\int_{-1}^{1}\powspec |\beampatu|^2 \,du.
+\end{equation}
+Replace the beampattern with the array polynomial
+${P(z = e^{j\pi u})}$ to get
+\begin{equation}
+\label{eq:obj-func-poly}
+f(\wt) = \half\int_{-1}^{1}\powspec |P(e^{j\pi u})|^2 \,du.
+\end{equation}
+
+Assume the weight vector $\wmvdr$ solves the optimization problem \eqref{eq:mvdr-const-prob}. The ensemble zero locations correspond to the ensemble MVDR weight vector. Factor the polynomial $P(e^{j\pi u})$ in terms of ensemble zeros
+\begin{equation}
+  \label{eq:mvdr-poly-zeros-format}
+P(e^{j\pi u}) = \prod\limits_{n=1}^{N-1}\frac{(1 - \ensz_i e^{-j\pi u})}{(1 - \ensz_i)},
+\end{equation}
+where $\ensz_i$s are the ensemble zeros and $P(z) = 1$ for
+$z = 1$.
+Using \eqref{eq:mvdr-poly-zeros-format} in \eqref{eq:obj-func-spec},
+the objective function is
+\begin{equation}
+\label{eq:obj-func-zeros-form}
+f(\wmvdr) = \half\int_{-1}^{1}\powspec \prod\limits_{n=1}^{N-1}\frac{(1 -
+   \ensz_n e^{-j\pi u})}{(1 - \ensz_n)} \frac{(1 - \ensz_n^*e^{j\pi u})}{(1 - \ensz_n^*)}\,du
+\end{equation}
+Assume the zeros in \eqref{eq:mvdr-poly-zeros-format} are not on the
+unit circle. Replacing one zero $\ensz_i$ by its conjugate-reciprocal
+$1/\ensz_i^*$ in \eqref{eq:obj-func-zeros-form} keeps the objective
+function unchanged. However, changing the zero alters the polynomial resulting in a
+different weight vector. This implies there exists a weight vector
+different from the weight vector corresponding to
+\eqref{eq:mvdr-poly-zeros-format} which still optimizes
+\eqref{eq:mvdr-const-prob}. This contradicts with the uniqueness of
+the solution to \eqref{eq:mvdr-const-prob}. The uniqueness holds only
+when the zeros of $\mvdrpoly{z}$ are on the unit circle. Hence the MVDR
+zeros must be on the unit circle.
+
+% =====================================================================
+
+\chapter{Evaluation of derivatives}
+\label{app:apdx-derivation}
+In \sect{}\ref{sec:perturbation-model}, solving for the optimal phase angle perturbation parameter $\deltau$ requires evaluating the derivatives in \eqref{eq:derivative-equation}. This appendix presents the evaluation of the expression for the derivatives.
+
+Using the definition in \eqref{eq:approx-inter-pout}, the derivative of the interferer contribution to the output power is 
+\begin{align} 
+ \label{eq:inter-pout-derivative}
+ \frac{d\,P_I(\deltau)}{d\deltau} =& \interfpow|\cbfNtwozeropoly(\uinter)|^2 \frac{d |\funczero{\expo{j\pi \uinter}}|^2}{d\deltau}.
+\end{align}
+Using the definition in \eqref{eq:approx-wn-pout} the derivative of the white noise contribution to the output power is
+\begin{align}
+\label{eq:wn-pout-derivative}
+\frac{d\,P_W(\deltau)}{d\deltau} =& \frac{\noisepow}{2}\int\limits_{-1}^{1} |\cbfNtwozeropoly(u)|^2 \frac{d|\funczero{\expo{j\pi \uinter}} |^2}{d\deltau}\,du.
+\end{align}
+Eq.~\eqref{eq:wn-pout-derivative} used the Leibniz integral rule to simplify the derivative of the integral. 
+Evaluating \eqref{eq:inter-pout-derivative} and \eqref{eq:wn-pout-derivative} requires the derivative of $|\funczero{\expo{j\pi u}}|^2$ w.r.t.  $\deltau$. Using the expression for $|\funczero{\expo{j\pi u}}|^2$ from \eqref{eq:bp-poly-perturb}, the derivative is
+\begin{align} 
+\label{eq:funczero-derivative}
+\frac{d\, |\funczero{\expo{j\pi u}}|^2}{d\deltau} =& \frac{-(\sin(a) + \sin(b) - \sin(a+b))}{(1 - \cos(b + \pi\deltau))^2} + \nonumber \\
+& \frac{(\cos(a) - \cos(b))\pi\deltau}{(1 - \cos(b + \pi\deltau))^2} 
+\end{align}
+where $a = \pi(u - \uinter)$, $b = \pi\uinter$. In the region of INR
+$>10$dB in \figurename{}~\ref{fig:mvdr-zeros-phase}, the perturbation
+angle $\deltau$ is very small as indicated by an almost flat solid
+black curve aligned against the dashed horizontal line. The subsequent
+derivation uses the following the small angle approximations
+$\sin(\pi\deltau) \approx \pi\deltau$ and
+$\cos(\pi\deltau) \approx 1$. Substituting
+\eqref{eq:funczero-derivative} in \eqref{eq:inter-pout-derivative}
+gives
+\begin{align} 
+\label{eq:nd-derivative}
+\frac{d\,P_I(\uinter, \deltau)}{d\deltau} =& \interfpow |\cbfNtwozeropoly(\uinter)|^2 \frac{\pi\deltau(1 - \cos(\pi\uinter))}{(1 - \cos(b + \pi\deltau))^2} \nonumber \\
+=& \interfpow\frac{\pi\deltau C}{(1 - \cos(b + \pi\deltau)},
+\end{align}
+and substituting in \eqref{eq:wn-pout-derivative} gives
+\begin{align} 
+\label{eq:wng-derivative}
+\frac{d\,P_W(u, \deltau) }{d\deltau} =& \noisepow \biggl(\half\int_{-1}^{1} \
+\frac{-|\cbfNtwozeropoly(u)|^2(\sin(a) + \sin(b) - \sin(a+b))}{(1 - \cos(b + \pi\deltau))^2}\, du + \nonumber\\
+& \frac{\pi\deltau}{2}\int_{-1}^{1} \frac{|\cbfNtwozeropoly(u)|^2(\cos(a)-\cos(b))\pi\deltau}{(1 - \cos(b + \pi\deltau))^2} \, du \biggr)  \nonumber \\
+=& \frac{\noisepow(-A + \pi\deltau B)}{(1 - \cos(b + \pi\deltau)}
+\end{align}
+where constants $A$, $B$ and $C$ are
+\begin{align*}
+  A =& \half\int_{-1}^{1} \
+     |\cbfNtwozeropoly(u)|^2(\sin(a) + \sin(b) + \sin(a+b))\, du \\
+  B =& \half\int_{-1}^{1} |\cbfNtwozeropoly(u)|^2(\cos(a)-\cos(b))\pi\deltau \, du \\
+  C =& |\cbfNtwozeropoly(\uinter)|^2\pi\deltau(1 - \cos(\pi\uinter)).
+\end{align*}
+
+Using \eqref{eq:nd-derivative} and \eqref{eq:wng-derivative} in \eqref{eq:derivative-equation} gives
+\begin{align}
+  \label{eq:1}
+  -\interfpow \pi\deltau C &=  \noisepow (-A + \pi\deltau B)
+\end{align}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
