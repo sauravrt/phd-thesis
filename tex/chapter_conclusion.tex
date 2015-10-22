@@ -1,0 +1,39 @@
+
+\chapter{Conclusions}
+\label{ch:conclusion}
+The work presented in this thesis develops a model for the ensemble
+zero locations and introduces two new ABF algorithms. The model for
+the ensemble zeros expresses the zero locations as a function of the
+INR. The model highlights the trade off between the interferer
+suppression and white noise gain to produce minimum output power using
+the ensemble MVDR beamformer. Numerical evaluation show that the model
+predictions are a good match to the ensemble zero location, for a
+range of INR values.
+
+The UC MVDR ABF introduced in Ch.~\ref{ch:ucmvdr} improves interferer
+and white noise suppression of the SMI MVDR ABF. The UC MVDR algorithm
+moves the sample zeros radially to the unit circle satisfying the unit
+circle constraint on the ensemble zeros. The UC MVDR approach differs
+from the diagonal loading approach which is shown to move the sample
+zeros along specific trajectories towards the CBF zero
+locations. Simulation results show that the UC MVDR ABF yields deeper
+notch at the interferer direction and improves WNG performance
+compared to the SMI MVDR ABF, and the DL MVDR ABF with comparable DL
+factor. Additionally, implementation of the UC MVDR in a snapshot deficient case and the unit circle DMR ABF are also discussed.
+
+The DZ MVDR ABF introduced in Ch.~\ref{ch:dzmvdr} is a new approach to
+notch broadening. The proposed algorithm exploits the property of ABF
+beampattern near a second-order zero combined with subarray processing
+to produce broad notches at interferer directions. Numerical
+simulations evaluated the performance of the DZ MVDR ABF in presence
+of stationary and moving interferers. The eigenanalysis of the sinc
+taper matrix reveled that the CMT MVDR uses three DoFs per interferer
+when the notch width is set equal to one resolution
+width. Consequently, in presence of multiple interferers, the CMT MVDR
+failed to suppress output power compared to the DZ MVDR ABF which uses
+only two DoF per interferer.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
