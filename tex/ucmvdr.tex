@@ -47,12 +47,14 @@ main-lobe region ensures the UC MVDR main-lobe remains undistorted.
 \begin{figure}[!hp]
 \centering
 \includegraphics[width=0.9\textwidth]{ucmvdr_cartoon}  
-\caption{Schematic shows the unit circle projection technique. The
+\caption[Schematic showing the unit circle projection
+technique]{Schematic shows the unit circle projection technique. The
   diamond markers denote the sample zeros ($\sampz_n$) and the circle
   markers denote the unit circle zeros ($\ucz$) obtained by radially
   projecting the sample zeros. The sample zeros within the main-lobe
   region ($-2/N \leq u \leq 2/N$) are moved to the closest CBF
-  first-null location ($u_{\text{null}} = \pm 2/N$) on the unit circle.}
+  first-null location ($u_{\text{null}} = \pm 2/N$) on the unit
+  circle.}
 \label{fig:ucmvdr-cartoon}
 \end{figure}
 
@@ -138,11 +140,13 @@ in the ensemble constraint space, i.e., on the unit circle.
 {\includegraphics[width=3.5in]{mvdr_smi_dl_zfc_N11_pzplot_eg}  \label{fig:smi-ucmvdr-pzplot}}
 
 \subfloat[Log-magnitude beampattern]{\includegraphics[width=3.5in]{mvdr_smi_dl_zfc_N11_bpplot_eg}  \label{fig:smi-ucmvdr-bpplot}}
-\caption{Zero locations and log-magnitude beampatterns of a
-  representative example of SMI MVDR (blue) and UC MVDR ABF (magenta)
-  using $N = 11$ sensor ULA for $L = 12$ snapshots and look direction
-  $\ulook = 0$. The unit circle zeros of the UC MVDR ABF produce nulls
-  and lowers sidelobes compared to the SMI MVDR ABF beampattern.}
+\caption[Zero locations and log-magnitude beampatterns of a
+representative example of SMI MVDR and UC MVDR ABF] {Zero locations
+  and log-magnitude beampatterns of a representative example of SMI
+  MVDR (blue) and UC MVDR ABF (magenta) using $N = 11$ sensor ULA for
+  $L = 12$ snapshots and look direction $\ulook = 0$. The unit circle
+  zeros of the UC MVDR ABF produce nulls and lowers sidelobes compared
+  to the SMI MVDR ABF beampattern.}
 \label{fig:smi-ucmvdr-plots}
 \end{figure}
 

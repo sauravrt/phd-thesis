@@ -139,11 +139,17 @@ given array aperture, i.e., $\cmtW = 2/(N-1)$ \cite{song2003null}.
 
 \begin{figure}[!ht]
   \centering
-  \subfloat[]{\includegraphics[width=0.5\textwidth]{cmt_bp.pdf}\label{fig:cmt-bp}}
+\subfloat[]{\includegraphics[width=0.5\textwidth]{cmt_bp.pdf}\label{fig:cmt-bp}}
 
-  \subfloat[]{\includegraphics[width=0.5\textwidth]{cmt_pz.pdf}\label{fig:cmt-pz}}
+\subfloat[]{\includegraphics[width=0.5\textwidth]{cmt_pz.pdf}\label{fig:cmt-pz}}
 
-  \caption{(a) Log-magnitude beampattern and (b) zeros of CMT MVDR ABF using $N = 11$ sensor ULA and steered towards $\ulook = 0$. The CMT notch width $\cmtW = 2/(N-1$). Two interferers are present at directions $\uinter = 3/N$ and $-5/N$ denoted by dashed vertical lines in (a) and dashed radial lines in (b). The CMT MVDR uses four zeros per interferer to create broad notch at the cost of high sidelobes and wider mainlobe.}
+\caption[Beampattern and polynomial zeros of CMT MVDR ABF implemented using $N = 11$ sensor ULA]{(a) Log-magnitude beampattern and (b) zeros of CMT MVDR ABF
+  using $N = 11$ sensor ULA and steered towards $\ulook = 0$. The CMT
+  notch width $\cmtW = 2/(N-1$). Two interferers are present at
+  directions $\uinter = 3/N$ and $-5/N$ denoted by dashed vertical
+  lines in (a) and dashed radial lines in (b). The CMT MVDR uses four
+  zeros per interferer to create broad notch at the cost of high
+  sidelobes and wider mainlobe.}
 \label{fig:cmt-bp-pz}
 \end{figure}
 
@@ -161,25 +167,19 @@ vicinity of the interferer direction. Equivalently, the associated CMT
 MVDR polynomial zeros cluster in the vicinity of a interferer
 direction, as seen in the zeros plot. For a given interferer strength,
 the number of zeros used to produce the notch broadening depends on
-the notch width parameter $\cmtW$. The wider the notch width
-required, more zeros per interferer are used to produce notch
-broadening. In the \figurename{}~\ref{fig:cmt-pz}, the CMT MVDR ABF is
-using four zeros per interferer to produce broad notches. However, as
-seen in the beampattern the CMT MVDR ABF produces broad notches at the
-cost of high sidelobes and wider mainlobe which reduces the WNG
+the notch width parameter $\cmtW$. The wider the notch width required,
+more zeros per interferer are used to produce notch broadening. In the
+\figurename{}~\ref{fig:cmt-pz}, the CMT MVDR ABF is using four zeros
+per interferer to produce broad notches. However, as seen in the
+beampattern the CMT MVDR ABF produces broad notches at the cost of
+high sidelobes and wider mainlobe which reduces the WNG
 [\sect{}~\ref{sec:wng}].
 
 \subsubsection{CMT as spatial modulation}
 \label{sec:cmt-as-spatial}
-
-\srt{Added this section to discuss how eigenanalysis of taper matrix explains the usage of three DoF per interferer when $\cmtW = 2/(N-1)$.}
-
-The CMT approach of augmenting the SCM with the taper matrix
-$\taperMat$ in \eqref{eq:taper-mat} is equivalent to performing
-spatial modulation of the observed snapshots. The spatial modulation
-of the snapshot generates fictitious sources around the planewave
-sources contained in the snapshot. The eigendecomposition of the taper
-matrix is
+CMT approach using taper matrix $\taperMat$ in \eqref{eq:taper-mat}
+generates fictitious sources around the interferer direction as
+discussed below. The eigendecomposition of the taper matrix is
 $\taperMat = \sum_{n=1}^{N}\eval_n\taperevec_n\taperevec_n\herm$ where
 $\taperevec_n$ is the $n\nth$ eigenvector and $\eval_n$ is the
 associated eigenvalue such that
@@ -190,44 +190,64 @@ $W = 2/(N-1)$, the taper matrix $\taperMat$ has only two significant
 eigenvalues. Using the eigendecomposition of $\taperMat$, the tapered
 SCM is
 \begin{align*}
-  \sampCov_{T} &= \left( \frac{1}{L}\sum\limits_{\ell = 1}^{L}\datavec_{\ell}\datavec_{\ell}\herm \right) \circ \left( \sum\limits_{n=1}^{N}\eval_n\taperevec_n\taperevec_n\herm \right).\\
-  \intertext{Considering only the two largest eigenvalues $\eval_1$ and $\eval_2$, and rearranging the terms,}
-  \
-   \sampCov_{T} &= \frac{1}{L}\sum\limits_{n=1}^{2}\eval_n\sum\limits_{\ell = 1}^{L}(\datavec_{\ell}\circ\taperevec_n)(\datavec_{\ell}\circ\taperevec_n)\herm\\
-               &= \frac{1}{L}\sum\limits_{n=1}^{2}\eval_n\sum\limits_{\ell = 1}^{L}\modvec_{n\ell}\modvec_{n\ell}\herm \\
-               &= \sum\limits_{n=1}^{2}\eval_n\sampCov_n
+  \sampCov_{T} &= \left( \frac{1}{L}\sum\limits_{\ell = 1}^{L}\datavec_{\ell}\datavec_{\ell}\herm \right) \circ \left( \sum\limits_{n=1}^{N}\eval_n\taperevec_n\taperevec_n\herm \right)\\
+ \
+ &= \frac{1}{L}\sum\limits_{n=1}^{N}\eval_n\sum\limits_{\ell = 1}^{L}(\datavec_{\ell}\circ\taperevec_n)(\datavec_{\ell}\circ\taperevec_n)\herm\\
+               &=
+               \sum\limits_{n=1}^{N}\eval_n\left(\frac{1}{L}\sum\limits_{\ell
+                 = 1}^{L}\modvec_{n\ell}\modvec_{n\ell}\herm \right ), \\
+\intertext{considering only the two significant eigenvalues,}
+\sampCov_{T}  &= \sum\limits_{n=1}^{2}\eval_n\sampCov_n,
 \end{align*}
 where $\modvec_{n\ell} = (\datavec_{\ell}\circ\taperevec_n)$ is the
-$\ell\nth$ snapshot modulated by $\taperevec_n$ and
-$\sampCov_n$ is the SCM obtained by averaging the snapshots modulated
-by $\taperevec_n$ for $n = 1, 2$. Hence, the tapered SCM
-$\sampCov_{T}$ is a combination of $\sampCov_n$ weighted
-by the eigenvalues ($\eval_n$) of the taper matrix.
+$\ell\nth$ snapshot $\datavec_{\ell}$ element-wise multiplied by the
+eigenvector $\taperevec_n$ and $\sampCov_n$ is the SCM obtained by
+averaging $\modvec_{n\ell}$ for $n = 1, 2$. Multiplying a snapshot
+$\datavec_{\ell}$ by an eigenvector corresponds to the convolution in
+spatial frequency domain between the spatial spectrum of the snapshot
+and the eigenbeam, i.e., the spatial spectrum of the eigenvector. A
+snapshot $\datavec_{\ell}$ containing stationary planewave interferers
+has impulses in the spatial spectrum at interferer directions. Hence,
+convolution with interferer spatial spectrum shifts the eigenbeams to
+the interferer direction. This is analogous to the classic time domain
+amplitude modulation where a sinusoidal carrier is multiplied with the
+message signal. The sinusoidal carrier has two impulses in the
+frequency domain and convolution with this spectrum makes frequency
+shifted copies of the message signal spectrum.
 
-\figurename{}~\ref{fig:cmt-eigenbeam} shows the magnitude of
+\figurename{}~\ref{fig:cmt-eigenbeam} shows the magnitude of the
 eigenbeams of the first two principal eigenvectors $\taperevec_1$
-(blue) and $\taperevec_2$ (green). The eigenbeam for $\taperevec_1$
-has a single mainlobe in the broad side direction, identical to a CBF
-beampattern steered to the broadside direction. This eigenbeam
-indicates that snapshot modulation by $\taperevec_1$ keeps the
-planewave signal in the snapshot, unchanged. However, the eigenbeam
-for $\taperevec_2$ has two distinct peaks on either side of the
-broadside direction. The two peaks in the eigenbeam indicates that
-snapshot modulation by $\taperevec_2$ produces scaled copies of the
-planewave signal in the snapshot, on either side of the signal
-direction. In effect, the CMT operation using the taper matrix in
-\eqref{eq:taper-mat} introduces a pair of fictitious sources on either
-side of the interferer direction. Hence, an MVDR ABF implemented using
-the tapered SCM $\sampCov_{T}$ places notch on either side of the
-interferer direction, effectively producing broader notch as seen in
-\figurename{}~\ref{fig:cmt-bp}. Consequently, the CMT MVDR ABF using
-notch width $\cmtW = 2/(N-1)$ uses three degree of freedom (DoF) per
-interferer to produce notch broadening.
+(blue) and $\taperevec_2$ (green). Firstly, the eigenbeam for
+$\taperevec_1$ has a single mainlobe in the broadside direction,
+identical to the spatial spectrum of a single planewave signal
+observed using a ULA. Convolving the snapshot spatial spectrum with
+the eigenbeam of $\taperevec_1$ shifts the blue eigenbeam to the
+interferer direction. The single mainlobe of the shifted eigenbeam
+indicates the interferer signal in the snapshot. Secondly, the
+eigenbeam for $\taperevec_2$ has two distinct peaks on either side of
+the broadside direction. Convolving the snapshot spatial spectrum with
+the eigenbeam of $\taperevec_2$ shifts the the green eigenbeam to
+interferer direction. The two peaks of the shifted eigenbeam indicates
+a pair of planewave signals on either side of the interferer
+direction. In effect, CMT operation performs spatial modulation of the
+snapshots $\datavec_{\ell}$ to add a pair of fictitious sources around
+the interferer direction resulting in three virtual interferers for
+MVDR to suppress for each physical interferer. Hence, an MVDR ABF
+implemented using the tapered SCM $\sampCov_{T}$ places notch on
+either side of the interferer direction, effectively producing a
+broader notch as seen in \figurename{}~\ref{fig:cmt-bp}. Consequently,
+the CMT MVDR ABF using notch width $\cmtW = 2/(N-1)$ uses three degree
+of freedom (DoF) per interferer to produce notch broadening.
 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.8\textwidth]{cmt_eigval_beam.pdf}
-  \caption{Magnitude of eigenbeam for first two principal eigenvectors of taper matrix in \eqn{}\eqref{eq:taper-mat}. The eigenvectors spatially modulate the snapshots to create replica of planewave signal in the snapshot on either side of the signal direction.}
+  \caption[Magnitude of eigenbeam for first two principal eigenvectors
+  of the sinc taper matrix]{Magnitude of eigenbeam for first two principal
+    eigenvectors of taper matrix in \eqn{}\eqref{eq:taper-mat}. The
+    eigenvectors spatially modulate the snapshots to create replica of
+    planewave signal in the snapshot on either side of the signal
+    direction.}
   \label{fig:cmt-eigenbeam}
 \end{figure}
 
@@ -259,8 +279,8 @@ null where the first-order null creates a sharp notch whereas the
 second-order null creates a deeper and broader notch. Any mismatch in
 the interferer direction changes the ND at the interferer direction
 $\uinter$. In case of a mismatch, the ND produced by the first-order
-null exhibits greater variation compared to the second-order null
-due to the linear and quadratic nature of their respective
+null exhibits greater variation compared to the second-order null due
+to the linear and quadratic nature of their respective
 beampatterns. As a result, the ND produced by the first-order null is
 more sensitive to interferer direction mismatch compared to the ND
 produced by the second-order null. The DZ MVDR ABF presented in the
@@ -270,12 +290,13 @@ broader notches in the MVDR beampattern.
 \begin{figure}[!hp]
   \centering
   \includegraphics[width=0.8\textwidth]{interf_single_dbl_zero_beampattern.pdf}
-  \caption{MVDR beampattern magnitude zoomed into the neighborhood of a
-    null. The null location in directional cosine $u$ axis is denoted by
-    the circle marker.  The vertical dashed line indicates the
-    interferer direction. The blue solid curve denotes the first order
-    null produced by the MVDR beamformer. The red dashed curve denotes
-    a second order null in the same location.}
+  \caption[MVDR beampattern magnitude zoomed into the neighborhood of
+    a null]{MVDR beampattern magnitude zoomed into the neighborhood of
+    a null. The null location in directional cosine $u$ axis is
+    denoted by the circle marker.  The vertical dashed line indicates
+    the interferer direction. The blue solid curve denotes the first
+    order null produced by the MVDR beamformer. The red dashed curve
+    denotes a second order null in the same location.}
   \label{fig:mvdr-null-zero}
 \end{figure}
 

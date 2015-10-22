@@ -102,7 +102,8 @@ circle.
 \begin{figure}[!hp]
   \centering
   \includegraphics[width=\textwidth]{single_interf_mvdr_bp_zoom.pdf}
-  \caption{Zoomed in section of the ensemble MVDR ABF
+  \caption[Zoomed in section of the ensemble MVDR ABF
+    beampatterns.]{Zoomed in section of the ensemble MVDR ABF
     beampatterns. The ABF is implemented using $N = 11$ sensor ULA and
     a single interferer is present at $\uinter$. The solid vertical
     line denotes the interferer direction. The three beampatterns
@@ -169,10 +170,10 @@ characterizes the phase angle of $\ensz_1$ as a function of the INR.
 \begin{figure}[!hp]
   \centering
   \includegraphics[width=6in]{mvdr_zeros_phase}
-  \caption{Phase angle of the ensemble MVDR ABF polynomial zeros for a
+  \caption[Phase angle of the ensemble MVDR ABF polynomial
+  zeros]{Phase angle of the ensemble MVDR ABF polynomial zeros for a
     range of INR values. The ABF is implemented using an $N = 11$
-    sensor ULA and a single interferer is present at $\uinter =
-    3/N$.
+    sensor ULA and a single interferer is present at $\uinter = 3/N$.
     The phase angle of the interferer direction is denoted by the
     horizontal dashed line. Only the ensemble zeros corresponding to
     the black and the magenta curve are sensitive to INR.}
@@ -202,7 +203,7 @@ assumptions:
 \begin{figure}[!hp]
   \centering
   \includegraphics[width=6in]{unit_arc_zeros_pertb.pdf}
-  \caption[Approximate ensemble zero model.]{Approximate model for
+  \caption[Approximate model for ensemble zero locations]{Approximate model for
     ensemble zero locations. The diamond marker denotes the interferer
     point ($\interz$) on the unit circle. The circle marker denotes
     the ensemble zero closest to the interferer and its location is
@@ -363,7 +364,8 @@ perturbation values in high INR cases.
 
 \subfloat[]{\includegraphics[width=3.5in]{zero_pertb_true_model_ulook2}%
   \label{fig:compare_second_case}}
-\caption{Comparison between the actual and the model predicted values
+\caption[Comparison between the actual and the model predicted values
+  of the phase angle perturbation $\deltau$]{Comparison between the actual and the model predicted values
   of the phase angle perturbation $\deltau$ when the interferer is
   present at (a) $\uinter = 3/N$ and (b) $\uinter = 3.5/N$. The model
   gives a good prediction of the actual perturbation values.}
@@ -428,12 +430,13 @@ zeros to the unit circle.
 \begin{figure}[!hp]
   \centering
   \includegraphics[width=5in]{mvdr_smi_pzlot_N11_L110_INR40}
-  \caption{SMI MVDR zeros from 1000 Monte Carlo trials for N = 11, L =
-    10N and INR = 40 dB. The dashed radial line denotes the phase
-    angle associated with the interferer direction $\uinter$. The
-    number of snapshots is impractically large for many passive sonar
-    situations, but is chosen to create a clearer clustering of the
-    SMI zeroes around the ensemble zeroes.}
+  \caption[SMI MVDR zeros from 1000 Monte Carlo trials for N = 11, L =
+  10 N and INR = $40$ dB]{SMI MVDR zeros from 1000 Monte Carlo trials
+    for N = 11, L = 10N and INR = 40 dB. The dashed radial line
+    denotes the phase angle associated with the interferer direction
+    $\uinter$. The number of snapshots is impractically large for many
+    passive sonar situations, but is chosen to create a clearer
+    clustering of the SMI zeroes around the ensemble zeroes.}
   \label{fig:smi-mvdr-pzplot}
 \end{figure}
 

@@ -58,17 +58,17 @@ interferer scenarios. In contrast, the SMI MVDR ABF's output is
 sensitive to the number of snapshots available.
 
 For all interferer scenarios and snapshot conditions, the ECDF of the
-DZ MVDR ABF is comparable with the DL MVDR ABF which has the same average
-WNG. Examining the snapshot limited ($L = 32$) case for both single
-and multiple interferer scenario the DZ MVDR ABF has lower median
-output power than the DL MVDR ABF. The lower output power indicates that
-the DZ MVDR ABF suppresses the interferer and noise better than the DL
-MVDR ABF. In the snapshot sufficient ($L = 62$) case for both single
-and multiple interferer scenario, the DZ MVDR and the DL MVDR ABF have
-essentially equal median output power. However the DL MVDR ABF
-requires a prior choice of the DL factor whereas the DZ MVDR ABF
-achieves same performance without the need to choose a design
-parameter.
+DZ MVDR ABF is comparable with the DL MVDR ABF which has the same
+average WNG. Examining the snapshot limited ($L = 32$) case for both
+single and multiple interferer scenario the DZ MVDR ABF has lower
+median output power than the DL MVDR ABF. The lower output power
+indicates that the DZ MVDR ABF suppresses the interferer and noise
+better than the DL MVDR ABF. In the snapshot sufficient ($L = 62$)
+case for both single and multiple interferer scenario, the DZ MVDR and
+the DL MVDR ABF have essentially equal median output power. However
+the DL MVDR ABF requires a prior choice of the DL factor whereas the
+DZ MVDR ABF achieves same performance without the need to choose a
+design parameter.
 
 \begin{figure*}[!hp]
   \centering
@@ -84,7 +84,8 @@ parameter.
   \subfloat[Multiple interferers, L = 62]
   {\includegraphics[width=3in]{total_pout_ecdf_multi_interf_N31_L62.pdf}%
     \label{fig:pout-m-L62}}
-  \caption{Output power ECDF for the SMI MVDR, DL MVDR and the DZ MVDR
+  \caption[Output power ECDF for the SMI MVDR, DL MVDR and the DZ MVDR
+    ABFs using an $N = 31$ element ULA]{Output power ECDF for the SMI MVDR, DL MVDR and the DZ MVDR
     ABFs using an $N = 31$ element ULA. The vertical dotted line
     denotes the ensemble MVDR output power level. The DZ MVDR ABF has
     higher probability of producing lower output power than the SMI
@@ -115,7 +116,8 @@ far smaller computational cost \cite{tuladhar2015ucmvdr}.
 \subfloat[Single interferer]{\includegraphics[width=3in]{dz_ucdz_ecdf_comp_single_interf.pdf}}
 \subfloat[Multiple interferers]{\includegraphics[width=3in]{dz_ucdz_ecdf_comp_multi_interf.pdf}}
 
-\caption{Output power ECDF for the DZ MVDR, the unit circle (UC)
+\caption[Output power ECDF for the DZ MVDR, the unit circle UC
+  constrained DZ MVDR and the UC MVDR ABF]{Output power ECDF for the DZ MVDR, the unit circle (UC)
   constrained DZ MVDR and the UC MVDR ABFs using an $N = 31$ element ULA
   and $L = 32$ snapshots. The UC constraint yields only a minimal gain
   over the DZ MVDR ABF.}
@@ -182,7 +184,7 @@ mismatch \cite{Gilbert1955}.
 \subfloat[Multiple interferer]{\includegraphics[width=3in]{wng_scatter_composite_multi_N31.pdf}
 %\subfloat[L = 62]{\includegraphics[width=2.5in]{wng_single_interf_N31_L62_INR40.pdf}
 \label{fig:wng-s-L62}}
-\caption{WNG scatter plot comparing the DZ MVDR and the SMI MVDR ABFs
+\caption[WNG scatter plot comparing the DZ MVDR and the SMI MVDR ABF]{WNG scatter plot comparing the DZ MVDR and the SMI MVDR ABFs
   using an $N = 31$ element ULA. On average, the DZ MVDR ABF has a
   higher WNG.}
 \label{fig:wng-scatter}
@@ -237,11 +239,13 @@ constraining the number of degrees of freedom.
 \hfil
 \subfloat[Multiple interferers]{\includegraphics[width=3.5in]{pout_snapshot_N31_multi.pdf}
 \label{fig:pout-snapshot-L62}}
-\caption{Mean output power from ABFs using different number of
-  snapshots for single and multiple interferer cases. The DZ MVDR ABF
-  exhibits significant gain over the SMI MVDR ABF in suppressing
-  output power when snapshot limited. The DZ MVDR ABF has a mean output
-  power comparable with the DL MVDR ABF.}
+\caption[Mean output power from ABFs using different number of
+snapshots for single and multiple interferer cases]{Mean output power
+  from ABFs using different number of snapshots for single and
+  multiple interferer cases. The DZ MVDR ABF exhibits significant gain
+  over the SMI MVDR ABF in suppressing output power when snapshot
+  limited. The DZ MVDR ABF has a mean output power comparable with the
+  DL MVDR ABF.}
 \label{fig:pout-snapshot}
 \end{figure*}
 
@@ -358,11 +362,12 @@ change in output power.
 \subfloat[$\mu = 2$]
 {\includegraphics[width=3.5in]{dzmv_moving_interf_pout_ecdf_mu2.pdf}
 \label{fig:pout-ecdf-mu2}}
-\caption{Total output power ECDF for the DZ MVDR, the CMT MVDR and the
-  SMI MVDR ABFs using an $N = 31$ element ULA for two interferer
-  velocity cases ($\mu = 1$ and $\mu = 2$). The DZ MVDR ABF has higher
-  probability of minimizing output power compared to both the SMI MVDR
-  and the CMT MVDR ABF. }
+\caption[Total output power ECDF for the DZ MVDR, the CMT MVDR and the
+SMI MVDR ABFs for different interferer velocity cases]{Total output
+  power ECDF for the DZ MVDR, the CMT MVDR and the SMI MVDR ABFs using
+  an $N = 31$ element ULA for two interferer velocity cases ($\mu = 1$
+  and $\mu = 2$). The DZ MVDR ABF has higher probability of minimizing
+  output power compared to both the SMI MVDR and the CMT MVDR ABF. }
 \label{fig:moving-interf-ecdf}
 \end{figure*}
 \figurename{}~\ref{fig:varying-velocity} compares the outputs from the
@@ -393,11 +398,13 @@ $\cmtW = 2/N$.
 \subfloat[Total output power]
 {\includegraphics[width=3in]{mean_pout_diff_motion.pdf}\label{fig:outp-diff-vel}}
 
-\caption{Output from the DZ MVDR, the SMI MVDR, and the CMT MVDR ABFs
-  using an $N = 31$ element ULA for varying interferer velocity
-  cases. The mean output power of the DZ MVDR ABF is about $10$dB
-  below the SMI MVDR ABF for all velocity cases. The mean output power
-  of the DZ MVDR ABF is comparable with that of the CMT MVDR ABF.}
+\caption[Output from the DZ MVDR, the SMI MVDR, and the CMT MVDR ABFs
+using for varying interferer velocity cases]{Output from the DZ MVDR,
+  the SMI MVDR, and the CMT MVDR ABFs using an $N = 31$ element ULA
+  for varying interferer velocity cases. The mean output power of the
+  DZ MVDR ABF is about $10$dB below the SMI MVDR ABF for all velocity
+  cases. The mean output power of the DZ MVDR ABF is comparable with
+  that of the CMT MVDR ABF.}
 \label{fig:varying-velocity}
 \end{figure*}
 
@@ -447,45 +454,42 @@ of freedom (DoF) per interferer to produce broad notch as discussed in
 interferer. This section compares the output performance of the CMT
 MVDR and the DZ MVDR ABF in case of a multiple interferers scenario.
 
-% To compare the ABFs, consider four interferer directions $\mathbf{\uinter} = \lbrace -7/N,~7/N,~3/N,~-3/N \rbrace$. For all
-% four cases, both ABFs are implemented using an $N = 31$ element ULA
-% and steered towards broadside ($\ulook = 0$). The CMT MVDR ABF is implemented using notch width $\cmtW = 2/(N - 1$).
-
 \figurename{}~\ref{fig:cmt-output-multi} compares the average output
 power from the DZ MVDR (black diamonds) and the CMT MVDR ABF (green
-circles) for four cases with different number of interferers
-$D = 1\,\text{to}\,4$. The experiments starts with $D = 1$ interferer
-at $\uinter = -7/N$ and introduces one additional interferer for each
-new case. The direction for additional interferers is chosen
-sequentially from the set
+circles) for four cases with number of interferers
+$D = \lbrace 1, 2, 3, 4 \rbrace$ respectively. The experiments starts
+with $D = 1$ interferer at $\uinter = -7/N$ and introduces one
+additional interferer for each new case. The direction for additional
+interferers is chosen sequentially from the set
 $\mathbf{\uinter} = \lbrace 7/N,~3/N,~-3/N \rbrace$ respectively. For
 all four cases, both ABFs are implemented using an $N = 11$ element
 ULA and steered towards broadside ($\ulook = 0$). The CMT MVDR ABF is
-implemented using notch width $\cmtW = 2/(N - 1$). Examining the
+implemented using notch width $\cmtW = 2/(N - 1$).  Examining the
 output power, the DZ MVDR and the CMT MVDR ABF produce comparable
 output for $ D \leq 2$. But for $D > 2$, the CMT MVDR ABF produces
 significantly higher output power compared to the DZ MVDR ABF.
 \figurename{}~\ref{fig:wng-cmt-multi} compares the inverse of the WNG
 of the ABFs.  The inverse of WNG is proportional to the white noise
 contribution to output power. When $D > 2$ the white noise
-contribution of the CMT MVDR ABF increases significantly. In presence
-of multiple interferers, the CMT MVDR ABF fails to suppress output
-power as it uses more DoF per interferer compared to the DZ MVDR ABF
-as discussed below.
+contribution of the CMT MVDR ABF increases significantly. In the
+presence of multiple interferers, the CMT MVDR ABF fails to suppress
+output power as it uses more DoF per interferer compared to the DZ
+MVDR ABF as discussed below.
 
-The MVDR ABFs using $N = 11$ element ULA and steered to a fixed look
-direction are limited to $N-2 = 9$ DoF for adaptation. When $D = 2$,
-the CMT MVDR uses six DoF to suppress interferer and the remaining
-DoFs are used for white noise suppression. But when $D = 3$, the CMT
-MVDR ABF uses all nine DoF to suppress interferer leaving no DoF for
-white noise suppression. This results in loss of WNG for the CMT MVDR
-and subsequent increase in white noise contribution to output
+The MVDR ABFs using the $N = 11$ element ULA and steered to a fixed
+look direction are limited to $N-2 = 9$ DoF for adaptation. When
+$D = 2$, the CMT MVDR uses six DoF to suppress interferer and the
+remaining DoFs are used for white noise suppression. But when $D = 3$,
+the CMT MVDR ABF uses all nine DoF to suppress interferer leaving no
+DoF for white noise suppression. This results in loss of WNG for the
+CMT MVDR and subsequent increase in white noise contribution to output
 power. Moreover when $D = 4$, the CMT MVDR ABF requires more than nine
-DoF, which results in failure to suppress interfere and loss of
+DoF, which results in failure to suppress interferer and loss of
 WNG. As a result the CMT MVDR ABF produces significantly high output
 power. In contrast, even when $ D = 4$, the DZ MVDR uses only eight
-DoF to suppress interferers. As a result the DZ MVDR ABF consistently
-produces lower output power for all four interferer cases.
+DoF to suppress interferers leaving the remaining DoF for white noise
+suppression. Hence the DZ MVDR ABF consistently produces lower output
+power in all four interferer cases.
 
 \begin{figure*}[!hp]
   \centering
@@ -495,7 +499,8 @@ produces lower output power for all four interferer cases.
   \subfloat[White noise contribution]{
     \includegraphics[width=3.5in]{./cmt_multi/dz_vs_cmt_wng_multi_case2.pdf}
     \label{fig:wng-cmt-multi}}
-  \caption{Comparison of (a) Output power and (b) white noise
+  \caption[Comparison of output from the DZ MVDR and the CMT MVDR ABFs for
+    different number of interferers]{Comparison of (a) Output power and (b) white noise
     contribution to output from the DZ MVDR and the CMT MVDR ABFs for
     different number of interferers. Both ABFs are implemented using
     $N = 11$ sensor ULA and steered towards broadside. The CMT MVDR
