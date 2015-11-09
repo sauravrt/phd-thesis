@@ -1,0 +1,47 @@
+
+\newgeometry{top=0in}
+\onehalfspacing
+\chapter*{Abstract}
+Analysis and Design of Adaptive Beamformers using Array Polynomial
+\begin{flushleft}
+by Saurav R. Tuladhar \\
+\end{flushleft}
+
+Adaptive beamformers (ABFs) place deep beampattern notches near
+interferers to suppress the interferers’ power in the ABF output. The
+sample matrix inversion (SMI) Minimum Variance Distortionless Response
+(MVDR) ABF computes the beamformer weights by substituting the sample
+covariance matrix (SCM) for the unknown ensemble covariance matrix in
+the MVDR expression. Errors in the SCM estimate of interferer
+direction due to limited sample support or interferer motion distorts
+the ABF beampattern and degrades the ability of the ABF to suppress
+the interferer. For beamformers using uniform linear arrays (ULA), the
+beampattern can be represented as a polynomial. The array polynomial
+is the $z$-transform of the beamformer weights. Evaluating the array
+polynomial on the unit circle in the complex plane yields the
+beampattern. For the ensemble MVDR beamforming using a ULA, the array
+polynomial zeros are constrained to fall on the unit circle. But the
+SMI MVDR polynomial zeros generally do not fall on the unit
+circle. The first part of the dissertation develops a model for the
+ensemble MVDR polynomial zero locations assuming a single interferer
+present in white background noise. The model illuminates the trade off
+balancing the interferer suppression and the white noise gain by the
+ensemble MVDR. Secondly, the dissertation proposes the unit circle
+MVDR (UC MVDR) beamformer which projects the SMI MVDR polynomial zeros
+radially on to the unit circle to satisfy the constraint on the zeros
+of ensemble MVDR polynomial. Numerical simulations show that the UC
+MVDR beamformer suppresses interferers better than the SMI MVDR and
+diagonal loaded MVDR beamformer and also improves the white noise gain
+(WNG). Finally, the dissertation proposes the double zero (DZ) MVDR
+ABF as a new approach to notch broadening. The array polynomial for
+the DZ MVDR ABF has second-order zeros, producing broader and deeper
+notches in the interferer direction. The DZ MVDR ABF outperforms the
+SMI MVDR and covariance matrix tapered ABFs in simulations with
+stationary and moving interferers.
+
+\restoregeometry
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
