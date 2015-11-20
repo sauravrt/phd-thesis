@@ -60,16 +60,15 @@ degraded interferer suppression \cite{baggeroer1999passive,
 Diagonal loading the SCM is one approach to address the issue of
 limited or insufficient snapshots. Diagonal loading ensures that the
 SCM is full rank and invertible to compute the MVDR beamformer
-weights. Additionally diagonal loading also improves ABF
-robustness against parameter mismatch \cite{vtree2002oap,
+weights. Additionally diagonal loading also improves ABF robustness
+against parameter mismatch \cite{vtree2002oap,
   mestre2005diagonal}. However, choosing an appropriate DL factor
-requires knowledge of the interferer and noise power levels which are
-unknown in practice. Several approaches have been proposed for
-choosing the appropriate diagonal loading factor. Mestre and Lagunas
-introduced a random matrix theory based estimator for the optimal DL
-factor with focus on snapshot limited scenarios. However the procedure
-for finding the optimal DL factor has significantly higher
-computational complexity \cite{mestre2006finite}.
+requires knowledge of the environment. Several approaches have been
+proposed for choosing the appropriate diagonal loading factor. Mestre
+and Lagunas introduced a random matrix theory based estimator for the
+optimal DL factor with focus on snapshot limited scenarios. However
+the procedure for finding the optimal DL factor has significantly
+higher computational complexity \cite{mestre2006finite}.
 
 Notch broadening is a robust beamforming technique that addresses the
 interferer direction mismatch issue by producing wide notch in the
@@ -89,12 +88,12 @@ approach to produce notch broadening using MVDR ABF
 
 Designing a beamformer requires choosing the weights of each sensor to
 obtain a beampattern with desirable properties. For ULAs the
-beampattern can be represented in terms of a polynomial. The
+beampattern can be represented as a polynomial. The
 $z$-transform of the weights for planewave beamformers using a ULA is
 called the beamformer array polynomial \cite{Schelkunoff1943array,
   vtree2002oap, Steinberg1976}. This is analogous to the system
 function representation of a discrete time (DT) LTI filter by taking
-z-transform of the impulse response. As with DT LTI filters,
+$z$-transform of the impulse response. As with DT LTI filters,
 beamformers also have a pole-zero representation in the complex
 plane. Continuing the analogy, the beampattern is obtained by
 evaluating the array polynomial on the unit circle. The array

@@ -48,7 +48,10 @@ dotted line in the beampattern plot indicates the interferer direction
     \label{fig:mvdr-pzplot}} \hfill
   \subfloat[]{\includegraphics[width=3.5in]{mvdr_cbf_N11_bp_plot}
   \label{fig:cbf-mvdr-bpplot}}
-\caption[Ensemble MVDR ABF polynomial zero locations]{Ensemble MVDR ABF \protect\subref{fig:mvdr-pzplot} polynomial
+\caption[Ensemble MVDR ABF \protect\subref{fig:mvdr-pzplot} polynomial
+  zero locations and \protect\subref{fig:cbf-mvdr-bpplot} log
+  magnitude of beampattern for an example case using $N = 11$ sensor
+  ULA.]{Ensemble MVDR ABF \protect\subref{fig:mvdr-pzplot} polynomial
   zero locations and \protect\subref{fig:cbf-mvdr-bpplot} log
   magnitude of beampattern for an example case using $N = 11$ sensor
   ULA. A single interferer is present at $\uinter = 3/N$ indicated by
@@ -99,9 +102,9 @@ notch. The change in beampattern null direction is replicated as
 change in the location of the corresponding ensemble zero on the unit
 circle.
 
-\begin{figure}[!hp]
+\begin{figure}[hp]
   \centering
-  \includegraphics[width=\textwidth]{single_interf_mvdr_bp_zoom.pdf}
+  \includegraphics[width=1\textwidth]{single_interf_mvdr_bp_zoom.pdf}
   \caption[Zoomed in section of the ensemble MVDR ABF
     beampatterns.]{Zoomed in section of the ensemble MVDR ABF
     beampatterns. The ABF is implemented using $N = 11$ sensor ULA and
@@ -135,7 +138,7 @@ the ensemble zero producing to the magenta curve as $\ensz_2$. The
 ensemble zeros $\ensz_1$ and $\ensz_2$ are the two zeros closest to
 the interferer point.
 
-As discussed in \sect{}\ref{sec:mvdr} the ensemble MVDR ABF simplifies
+As discussed in \sect{}\ref{sec:abf} the ensemble MVDR ABF simplifies
 to the CBF for the case of zero interferer power. In
 \figurename{}~\ref{fig:mvdr-zeros-phase}, for INR levels $< -20$ dB,
 the solid curves are uniformly spaced in phase angle except at the
@@ -171,7 +174,7 @@ characterizes the phase angle of $\ensz_1$ as a function of the INR.
   \centering
   \includegraphics[width=6in]{mvdr_zeros_phase}
   \caption[Phase angle of the ensemble MVDR ABF polynomial
-  zeros]{Phase angle of the ensemble MVDR ABF polynomial zeros for a
+  zeros.]{Phase angle of the ensemble MVDR ABF polynomial zeros for a
     range of INR values. The ABF is implemented using an $N = 11$
     sensor ULA and a single interferer is present at $\uinter = 3/N$.
     The phase angle of the interferer direction is denoted by the
@@ -197,13 +200,13 @@ assumptions:
   \figurename{}~\ref{fig:mvdr-zeros-phase}.
 \item The remaining $N - 2$ ensemble zeros are approximated to be in
   the CBF polynomial zero positions. For a given ULA size, the CBF
-  polynomial zero locations are known \cite{vtree2002oap}.
+  polynomial zero locations are known and independent of the INR level.\cite{vtree2002oap}.
 \end{itemize}
 
 \begin{figure}[!hp]
   \centering
   \includegraphics[width=6in]{unit_arc_zeros_pertb.pdf}
-  \caption[Approximate model for ensemble zero locations]{Approximate model for
+  \caption[Approximate model for ensemble zero locations.]{Approximate model for
     ensemble zero locations. The diamond marker denotes the interferer
     point ($\interz$) on the unit circle. The circle marker denotes
     the ensemble zero closest to the interferer and its location is
@@ -225,12 +228,11 @@ defined as some perturbation from the interferer point phase angle,
 i.e., $\ensz_1 = \expo{j\pi u_1} =\expo{j\pi(\uinter + \deltau)}$. The
 phase angle perturbation $\deltau$ depends on the INR level. The star
 markers denote the remaining $10$ ensemble zeros which are
-approximated to be in the CBF zero locations which are independent of
-the INR level. Based on the ensemble zero configuration in
+approximated to be in the CBF zero locations. For a given number of sensors, the CBF polynomial zero locations are known and independent of the INR level. Based on the ensemble zero configuration in
 \figurename{}~\ref{fig:perturb-model}, the ensemble MVDR ABF
-polynomial is,
+polynomial is
 \begin{align*} 
-  \mvdrpoly{z} &\approx \left(\prod\limits_{n=2}^{N-1}\frac{1 - \cbfz_n z\inv}{1 - \cbfz_n}\right) \left(\frac{1 - \ensz_1 z\inv}{1 - \ensz_1}\right).
+  \mvdrpoly{z} &\approx \left(\prod\limits_{n=2}^{N-1}\frac{1 - \cbfz_n z\inv}{1 - \cbfz_n}\right) \left(\frac{1 - \ensz_1 z\inv}{1 - \ensz_1}\right)
 \end{align*}
 where $\cbfz_n$ denote the $N-2$ CBF zeros. Expressing $\ensz_1$ as a
 complex exponential, the MVDR polynomial becomes a bivariate function
@@ -266,7 +268,7 @@ Similarly, using the definition of WNG in \eqref{eq:wng-beampat} the white noise
 &= \noisepow\left(\half\int_{-1}^{1}|\mvdrpoly{\expo{j\pi u}, \deltau}|^2\, du\right) \nonumber \\
 &= \noisepow\left(\half\int_{-1}^{1} |\cbfNtwozeropoly(u)|^2 |\funczero{\expo{j\pi \uinter}} |^2\, du\right).
 \end{align}
-As previously seen in \sect{}\ref{sec:mvdr}, when the observed
+As previously seen in \sect{}\ref{sec:abf}, when the observed
 snapshot contains a single planewave interferer in a white noise, the
 ensemble MVDR ABF output power is the sum of the contributions from
 the interferer and the white noise. Hence, the total output power is
@@ -279,7 +281,7 @@ expressed as a function of $\deltau$,
 
 The ensemble MVDR ABF is the optimal ABF that minimizes the output
 power for a given interferer and noise scenario
-(\sect{}\ref{sec:mvdr}). This implies that for a given INR level the
+(\sect{}\ref{sec:abf}). This implies that for a given INR level the
 optimal value of $\deltau$ in \eqref{eq:pout-deltau} should also
 minimize the output power. Assuming unity gain in the look direction
 and no parameter mismatch, the minimum output power is achieved when
@@ -365,7 +367,7 @@ perturbation values in high INR cases.
 \subfloat[]{\includegraphics[width=3.5in]{zero_pertb_true_model_ulook2}%
   \label{fig:compare_second_case}}
 \caption[Comparison between the actual and the model predicted values
-  of the phase angle perturbation $\deltau$]{Comparison between the actual and the model predicted values
+  of the phase angle perturbation $\deltau$.]{Comparison between the actual and the model predicted values
   of the phase angle perturbation $\deltau$ when the interferer is
   present at (a) $\uinter = 3/N$ and (b) $\uinter = 3.5/N$. The model
   gives a good prediction of the actual perturbation values.}
@@ -405,7 +407,7 @@ be a zero mean perturbation of the ensemble zero locations, although
 no analytical characterization is presented here. The number of
 snapshots considered in the example is impractically large for passive
 sonar scenario, but it is chosen to enhance the clustering of the
-sample zeros around the ensemble locations.
+sample zeros.% around the ensemble locations.
 
 The sample zeros located away form the unit circle do not produce
 beampattern nulls. Following the analogy with the DT LTI filters, the
@@ -430,9 +432,9 @@ zeros to the unit circle.
 \begin{figure}[!hp]
   \centering
   \includegraphics[width=5in]{mvdr_smi_pzlot_N11_L110_INR40}
-  \caption[SMI MVDR zeros from 1000 Monte Carlo trials for N = 11, L =
-  10 N and INR = $40$ dB]{SMI MVDR zeros from 1000 Monte Carlo trials
-    for N = 11, L = 10N and INR = 40 dB. The dashed radial line
+  \caption[SMI MVDR zeros from 1000 Monte Carlo trials for $N = 11$, $L =
+  10 N$ and INR = $40$ dB]{SMI MVDR zeros from 1000 Monte Carlo trials
+    for $N = 11$, $L = 10N$ and INR = 40 dB. The dashed radial line
     denotes the phase angle associated with the interferer direction
     $\uinter$. The number of snapshots is impractically large for many
     passive sonar situations, but is chosen to create a clearer

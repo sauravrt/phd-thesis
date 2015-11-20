@@ -1,4 +1,4 @@
-\section{Simulation Results}
+\section{Simulation results}
 \label{sec:results}
 This section discusses the results of the numerical experiments
 evaluating the performance of the DZ MVDR ABF. The experiments are
@@ -85,11 +85,11 @@ design parameter.
   {\includegraphics[width=3in]{total_pout_ecdf_multi_interf_N31_L62.pdf}%
     \label{fig:pout-m-L62}}
   \caption[Output power ECDF for the SMI MVDR, DL MVDR and the DZ MVDR
-    ABFs using an $N = 31$ element ULA]{Output power ECDF for the SMI MVDR, DL MVDR and the DZ MVDR
-    ABFs using an $N = 31$ element ULA. The vertical dotted line
-    denotes the ensemble MVDR output power level. The DZ MVDR ABF has
-    higher probability of producing lower output power than the SMI
-    MVDR and the DL MVDR ABFs.}
+  ABFs using an $N = 31$ element ULA.]{Output power ECDF for the SMI
+    MVDR, DL MVDR and the DZ MVDR ABFs using an $N = 31$ element
+    ULA. The vertical dotted line denotes the ensemble MVDR output
+    power level. The DZ MVDR ABF has higher probability of producing
+    lower output power than the SMI MVDR and the DL MVDR ABFs.}
   \label{fig:pout-ecdf}
 \end{figure*}
 
@@ -116,11 +116,12 @@ far smaller computational cost \cite{tuladhar2015ucmvdr}.
 \subfloat[Single interferer]{\includegraphics[width=3in]{dz_ucdz_ecdf_comp_single_interf.pdf}}
 \subfloat[Multiple interferers]{\includegraphics[width=3in]{dz_ucdz_ecdf_comp_multi_interf.pdf}}
 
-\caption[Output power ECDF for the DZ MVDR, the unit circle UC
-  constrained DZ MVDR and the UC MVDR ABF]{Output power ECDF for the DZ MVDR, the unit circle (UC)
-  constrained DZ MVDR and the UC MVDR ABFs using an $N = 31$ element ULA
-  and $L = 32$ snapshots. The UC constraint yields only a minimal gain
-  over the DZ MVDR ABF.}
+\caption[Output power ECDF for the DZ MVDR, the unit circle (UC)
+constrained DZ MVDR and the UC MVDR ABFs using an $N = 31$ element
+ULA.]{Output power ECDF for the DZ MVDR, the unit circle (UC)
+  constrained DZ MVDR and the UC MVDR ABFs using an $N = 31$ element
+  ULA and $L = 32$ snapshots. The UC constraint yields only a minimal
+  gain over the DZ MVDR ABF.}
 \label{fig:ecdf-dz-dzuc}
 \end{figure}
 
@@ -184,7 +185,7 @@ mismatch \cite{Gilbert1955}.
 \subfloat[Multiple interferer]{\includegraphics[width=3in]{wng_scatter_composite_multi_N31.pdf}
 %\subfloat[L = 62]{\includegraphics[width=2.5in]{wng_single_interf_N31_L62_INR40.pdf}
 \label{fig:wng-s-L62}}
-\caption[WNG scatter plot comparing the DZ MVDR and the SMI MVDR ABF]{WNG scatter plot comparing the DZ MVDR and the SMI MVDR ABFs
+\caption[WNG scatter plot comparing the DZ MVDR and the SMI MVDR ABF using an $N = 31$ element ULA.]{WNG scatter plot comparing the DZ MVDR and the SMI MVDR ABFs
   using an $N = 31$ element ULA. On average, the DZ MVDR ABF has a
   higher WNG.}
 \label{fig:wng-scatter}
@@ -240,7 +241,7 @@ constraining the number of degrees of freedom.
 \subfloat[Multiple interferers]{\includegraphics[width=3.5in]{pout_snapshot_N31_multi.pdf}
 \label{fig:pout-snapshot-L62}}
 \caption[Mean output power from ABFs using different number of
-snapshots for single and multiple interferer cases]{Mean output power
+snapshots for single and multiple interferer cases.]{Mean output power
   from ABFs using different number of snapshots for single and
   multiple interferer cases. The DZ MVDR ABF exhibits significant gain
   over the SMI MVDR ABF in suppressing output power when snapshot
@@ -263,8 +264,8 @@ snapshots for single and multiple interferer cases]{Mean output power
 \label{sec:moving-interferer}
 This section presents results from numerical experiments evaluating
 the performance of the ABFs in a moving interferer scenario. The
-experiment assumes a scenario containing single spatially moving
-interferer in a white background noise similarly to the
+experiment assumes a single spatially moving
+interferer similarly to the
 example in \cite[Sec. 4]{cox2000mrabf}. The interferer is initially at
 direction $u_0 = 5/N$ and moves away from the main lobe at a constant
 rate of $\rho_u$ per snapshot. The interferer direction at the
@@ -340,7 +341,7 @@ exhibits less variability than the output power of the SMI MVDR
 ABF. The CMT MVDR ABF also improves performance over the SMI MVDR
 ABF. But the DZ MVDR ABF still achieves lower median output power
 compared to the CMT MVDR.
-
+\clearpage
 Comparisons in \figurename{}~\ref{fig:pout-ecdf-mu2}, the case of
 $\mu = 2$, show that the DZ MVDR ABF again has higher probability of
 minimizing the output power compared to both the SMI MVDR and the CMT
@@ -363,10 +364,10 @@ change in output power.
 {\includegraphics[width=3.5in]{dzmv_moving_interf_pout_ecdf_mu2.pdf}
 \label{fig:pout-ecdf-mu2}}
 \caption[Total output power ECDF for the DZ MVDR, the CMT MVDR and the
-SMI MVDR ABFs for different interferer velocity cases]{Total output
-  power ECDF for the DZ MVDR, the CMT MVDR and the SMI MVDR ABFs using
-  an $N = 31$ element ULA for two interferer velocity cases ($\mu = 1$
-  and $\mu = 2$). The DZ MVDR ABF has higher probability of minimizing
+SMI MVDR ABFs using an $N = 31$ element ULA.]{Total output power ECDF for
+  the DZ MVDR, the CMT MVDR and the SMI MVDR ABFs using an $N = 31$
+  element ULA for two interferer velocity cases ($\mu = 1$ and
+  $\mu = 2$). The DZ MVDR ABF has higher probability of minimizing
   output power compared to both the SMI MVDR and the CMT MVDR ABF. }
 \label{fig:moving-interf-ecdf}
 \end{figure*}
@@ -398,8 +399,9 @@ $\cmtW = 2/N$.
 \subfloat[Total output power]
 {\includegraphics[width=3in]{mean_pout_diff_motion.pdf}\label{fig:outp-diff-vel}}
 
-\caption[Output from the DZ MVDR, the SMI MVDR, and the CMT MVDR ABFs
-using for varying interferer velocity cases]{Output from the DZ MVDR,
+\caption[Output from the DZ MVDR,
+  the SMI MVDR, and the CMT MVDR ABFs using an $N = 31$ element ULA
+  for varying interferer velocity cases.]{Output from the DZ MVDR,
   the SMI MVDR, and the CMT MVDR ABFs using an $N = 31$ element ULA
   for varying interferer velocity cases. The mean output power of the
   DZ MVDR ABF is about $10$dB below the SMI MVDR ABF for all velocity
@@ -499,14 +501,15 @@ power in all four interferer cases.
   \subfloat[White noise contribution]{
     \includegraphics[width=3.5in]{./cmt_multi/dz_vs_cmt_wng_multi_case2.pdf}
     \label{fig:wng-cmt-multi}}
-  \caption[Comparison of output from the DZ MVDR and the CMT MVDR ABFs for
-    different number of interferers]{Comparison of (a) Output power and (b) white noise
-    contribution to output from the DZ MVDR and the CMT MVDR ABFs for
-    different number of interferers. Both ABFs are implemented using
-    $N = 11$ sensor ULA and steered towards broadside. The CMT MVDR
-    uses notch width of $\cmtW = 2/(N-1)$. As the number of
-    interferers increases, the CMT MVDR fails to suppress output power
-    as it uses more DoF per interferer compared to the DZ MVDR ABF.}  
+  \caption[Comparison of (a) output power and (b) white noise
+  contribution to output from the DZ MVDR and the CMT MVDR ABFs.]{Comparison of (a) output power and
+    (b) white noise contribution to output from the DZ MVDR and the
+    CMT MVDR ABFs for different number of interferers. Both ABFs are
+    implemented using $N = 11$ sensor ULA and steered towards
+    broadside. The CMT MVDR uses notch width of $\cmtW = 2/(N-1)$. As
+    the number of interferers increases, the CMT MVDR fails to
+    suppress output power as it uses more DoF per interferer compared
+    to the DZ MVDR ABF.}
 \end{figure*}
 
 % As previously mentioned, the DZ MVDR ABF has only $(N-1)/2$ degrees of

@@ -1,4 +1,4 @@
-\section{Double Zero MVDR ABF}
+\section{Double zero MVDR ABF}
 \label{sec:double-zero-mvdr}
 The double zero MVDR (DZ MVDR) ABF is designed to produce broad
 beampattern notch in the interferer direction. The DZ MVDR algorithm
@@ -27,7 +27,8 @@ dimension $K \times 2L$. The data matrix $\dataMatK$ can be
 interpreted as the collection of $2L$ snapshot observed by $K$ element
 ULA.
 
-The augmented data matrix is used to compute the subarray SCM
+The augmented data matrix is used to compute the subarray sample
+covariance matrix
 $\sampCov_{\rm K} = (\dataMatK\dataMatK\herm)/(2L)$ and subsequently
 the ABF weight vector for a $K$ element subarray
 \begin{equation}
@@ -66,7 +67,8 @@ $\beampolyz{{\rm K}}$ with itself to obtain the DZ MVDR array polynomial,
 Thus the convolution operation doubles the number of zeros from the
 subarray SMI MVDR ABF to produce the DZ MVDR ABF. The DZ MVDR ABF
 array polynomial $\beampolyz{{\rm DZ}}$ has $(K - 1)$ SOZs in the same
-locations as $\sampz_{Ki}$  the zeros of the subarray SMI MVDR ABF.
+locations as the zeros of the subarray SMI MVDR ABF. The SOZs produce
+broader notches in the beampattern compared to the SMI MVDR ABF.
 
 The DZ MVDR ABF algorithm is extensible to the case when the number of
 sensors $N$ is even. When $N$ is even, the subarray size is set to
@@ -113,7 +115,7 @@ $z = -1$ \cite[Sec.~5.7.3]{Oppenheim1989}.
   {\includegraphics[width=5in]{sub_array.pdf}%
     \label{fig:subarray}}
 
-  \caption[DZ MVDR algorithm flow diagram]{DZ MVDR algorithm (a) flow diagram and (b) two $K$ element
+  \caption{DZ MVDR algorithm (a) flow diagram and (b) two $K$ element
     subarray configuration within the $N$ sensor ULA.}
   \label{fig:dzmvdr}
 \end{figure}
@@ -146,11 +148,11 @@ main-lobe twice as wide compared to the SMI MVDR ABF using full ULA. A wider mai
 
 \subsection{Unit circle constrained DZ MVDR ABF}
 \label{sec:unit-circle-constr}
-As previously seen in Ch.~\ref{ch:mvdr}, the ensemble MVDR beamformer
-polynomial zero locations are constrained on the unit circle for
-planewave beamforming using a ULA. The DZ MVDR algorithm described
-above can be modified to force all the SOZs onto the unit circle
-thereby satisfying the unit circle constraint on ensemble case
+As previously seen in Ch.~\ref{ch:mvdr-polyn-zeros}, the ensemble MVDR
+beamformer polynomial zero locations are constrained on the unit
+circle for planewave beamforming using a ULA. The DZ MVDR algorithm
+described above can be modified to force all the SOZs onto the unit
+circle thereby satisfying the unit circle constraint on ensemble case
 zeros. In \eqref{eq:subarray-wt}, computing the subarray weights
 $\wtK$ as a unit circle (UC) MVDR ABF weights instead of the SMI MVDR
 weights produces $K - 1$ zeros $\sampz_{Ki}$ on the unit circle
@@ -158,10 +160,11 @@ weights produces $K - 1$ zeros $\sampz_{Ki}$ on the unit circle
 derived by convolving the subarray UC MVDR weight vector $\wtK$ has
 all the SOZs on the unit circle. The unit circle SOZs produce flatter
 beampattern nulls and create broader notches in the interferer
-direction as discussed in \ref{sec:array-poly-rep}. However enforcing
-the UC constraint comes at a cost of additional computational overhead
-of solving for the zeros of $K\nth$ order array polynomial to compute
-the subarray UC MVDR ABF weights \cite{tuladhar2015ucmvdr}.
+direction as discussed in \sect{}\ref{sec:second-order-zeros}. However
+enforcing the UC constraint comes at a cost of additional
+computational overhead of solving for the zeros of $K\nth$ order array
+polynomial to compute the subarray UC MVDR ABF weights
+\cite{tuladhar2015ucmvdr}.
 
 % \subsection{Higher-order-zero MVDR }
 % \label{sec:higher-order-zero}

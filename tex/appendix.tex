@@ -1,5 +1,7 @@
-\chapter{Proof of unit circle constraint on MVDR zeros}
+\chapter{Proof of unit circle constraint}% on MVDR zeros}
 \label{sec:apdx-mvdr-zeros}
+% \addcontentsline{toc}{chapter}{Appendix A: Proof of unit circle constraint on MVDR zeros}
+
 The ensemble MVDR polynomial zeros are constrained to fall on the unit circle
 for planewave beamforming using a ULA. Steinhardt and Guerci proved this
 constraint on the MVDR ensemble zeros in \cite{steinhardt2004stap},
@@ -23,7 +25,6 @@ ${P(z = e^{j\pi u})}$ to get
 \label{eq:obj-func-poly}
 f(\wt) = \half\int_{-1}^{1}\powspec |P(e^{j\pi u})|^2 \,du.
 \end{equation}
-
 Assume the weight vector $\wmvdr$ solves the optimization problem \eqref{eq:mvdr-const-prob}. The ensemble zero locations correspond to the ensemble MVDR weight vector. Factor the polynomial $P(e^{j\pi u})$ in terms of ensemble zeros
 \begin{equation}
   \label{eq:mvdr-poly-zeros-format}
@@ -51,9 +52,10 @@ when the zeros of $\mvdrpoly{z}$ are on the unit circle. Hence the MVDR
 zeros must be on the unit circle.
 
 % =====================================================================
-
 \chapter{Evaluation of derivatives}
 \label{app:apdx-derivation}
+%\addcontentsline{toc}{chapter}{Appendix B: Evaluation of derivatives}
+
 In \sect{}\ref{sec:perturbation-model}, solving for the optimal phase angle perturbation parameter $\deltau$ requires evaluating the derivatives in \eqref{eq:derivative-equation}. This appendix presents the evaluation of the expression for the derivatives.
 
 Using the definition in \eqref{eq:approx-inter-pout}, the derivative of the interferer contribution to the output power is 

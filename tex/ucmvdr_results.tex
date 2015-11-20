@@ -90,17 +90,17 @@ performance compared to both SMI MVDR and DL MVDR ABFs.
     \label{fig:ecdf_N51L52INR40}}
   \subfloat[N = 51, L = 102]{\includegraphics[width=3in]{mvdr_smi_zfc_dl_Po_ecdf_N51L102_INR40}%
     \label{fig:ecdf_N51L102INR40}}
-  \caption[The ECDF of the interferer contributed output
-  power for the SMI MVDR, the DL MVDR and the UC MVDR ABF.]{ ECDF of the interferer contributed output power
-    $\pinter$. The ECDFs are compared between the SMI MVDR, DL MVDR
-    and the UC MVDR ABFs. The ABFs use $N = 11$ element ULA in the top
-    panel and $N = 51$ element ULAs in the bottom panel. The left
-    panels shows the snapshot deficient case ($L = N + 1$) and the
-    right panels shows the snapshot rich case ($L = 2N$). In each
-    panel the dashed vertical line denotes the interferer contributed
-    output power for the ensemble MVDR ABF. In all cases, the UC MVDR
-    ABF suppresses the interferer better compared to the SMI MVDR and
-    DL MVDR ABFs.}
+  \caption[ECDF of the interferer contributed output power $\pinter$
+  for the SMI MVDR, the DL MVDR and the UC MVDR ABF.]{ECDF of the
+    interferer contributed output power $\pinter$ for the SMI MVDR,
+    the DL MVDR and the UC MVDR ABF. The ABFs use $N = 11$ element ULA
+    in the top panel and $N = 51$ element ULAs in the bottom
+    panel. The left panels shows the snapshot deficient case
+    ($L = N + 1$) and the right panels shows the snapshot rich case
+    ($L = 2N$). In each panel the dashed vertical line denotes the
+    interferer contributed output power for the ensemble MVDR ABF. In
+    all cases, the UC MVDR ABF suppresses the interferer better
+    compared to the SMI MVDR and DL MVDR ABFs.}
   \label{fig:ecdf-plots}
 \end{figure}
 
@@ -123,7 +123,7 @@ detection performance as well.
   \subfloat[L = 22 snapshots]
 {\includegraphics[width=4in]{mvdr_smi_zfc_Po_meansq_var_N11_L22}%
     \label{fig:mpout_N11L22}}
-  \caption[Mean and variance of interferer output power $\pinter$ for the SMI MVDR and the UC MVDR ABF]{Dual y-axis plot of mean and variance of interferer output power $\pinter$ for the SMI MVDR (blue) and the UC MVDR ABF (magenta). Both ABFs are implement using $N = 11$ element ULA and SCM computed from $L = 12$ snapshots in top panel and $L = 22$ snapshots in bottom panel. The UC MVDR ABF yields interferer contributed output power with lower mean and variance compared to the SMI MVDR ABF.}
+  \caption[Dual y-axis plot of mean and variance of interferer output power $\pinter$ for the SMI MVDR (blue) and the UC MVDR ABF (magenta).]{Dual y-axis plot of mean and variance of interferer output power $\pinter$ for the SMI MVDR (blue) and the UC MVDR ABF (magenta). Both ABFs are implement using $N = 11$ element ULA and SCM computed from $L = 12$ snapshots in top panel and $L = 22$ snapshots in bottom panel. The UC MVDR ABF yields interferer contributed output power with lower mean and variance compared to the SMI MVDR ABF.}
   \label{fig:pout-mean-var-plots}
 \end{figure*}
 
@@ -167,8 +167,8 @@ also less sensitive to array parameter perturbations
 
 \subfloat[]{\includegraphics[width=3in]{mvdr_smi_zfc_WNG_scatter_N11L12_INR40}
     \label{fig:wng-scatter-plot}}
-  \caption[Comparison of WNG between the UC MVDR and the SMI MVDR ABF,
-    both implemented using an $N = 11$ element ULA]{Comparison of WNG between the UC MVDR and the SMI MVDR ABF,
+  \caption[Comparison of WNG for the UC MVDR and the SMI MVDR ABF,
+    both implemented using an $N = 11$ element ULA and $L = 12$ snapshots.]{Comparison of WNG for the UC MVDR and the SMI MVDR ABF,
     both implemented using an $N = 11$ element ULA and $L = 12$
     snapshots. Top panel compares the histogram of WNGs and the lower
     panel is a scatter plot of the WNGs. On average, the UC MVDR ABF
@@ -251,7 +251,8 @@ level.
   \centering
   \includegraphics[width=\textwidth]{mvdr_smi_uc_cbf_dl_varying_pzplot}
   \caption[UC MVDR polynomial zeros compared against DL MVDR
-    polynomial zeros]{UC MVDR polynomial zeros compared against DL MVDR
+    polynomial zeros as the DL level $\dl$ is increased from $-40$ dB to
+    $40$ dB.]{UC MVDR polynomial zeros compared against DL MVDR
     polynomial zeros as the DL level $\dl$ is increased from $-40$ dB to
     $40$ dB. The DL MVDR polynomial zeros asymptotically converge to CBF polynomial zero locations as $\dl \rightarrow \infty$. }
   \label{fig:ucbf-dlsmi-pzplot}

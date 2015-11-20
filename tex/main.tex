@@ -27,8 +27,9 @@ letterpaper,
 \usepackage[]{appendix}
 \numberwithin{equation}{chapter}
 
-\usepackage{titlesec}
-\titleformat{\chapter}[display]{\normalfont\huge\bfseries\singlespacing}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+% \usepackage{titlesec}
+% \titleformat{\chapter}[display]{\normalfont\huge\bfseries\singlespacing}{\chaptertitlename\ \thechapter}{20pt}{\huge}
+ % \titlespacing{\chapter}{0}{}{0.01in}
 
 \usepackage[titles, subfigure]{tocloft}
 \usepackage{calc}
@@ -61,6 +62,7 @@ footskip=0.3in]{geometry}
 % Entry for title page
 \author{Saurav R Tuladhar}
 \title{PhD Dissertation Draft}
+\newcommand{\thesistitle}{Improved Sample Matrix Inversion Adaptive Beamformers for Uniform Linear Arrays using Array Polynomial}
 % \raggedright
 
 
@@ -93,20 +95,19 @@ footskip=0.3in]{geometry}
 \renewcommand\cftchapfont{\normalfont}
 \renewcommand\cftchappagefont{\normalfont}
 \renewcommand{\contentsname}{Table of contents}
-\singlespacing
+\setlength{\cftbeforechapskip}{0.05in}
+\onehalfspacing
 \setcounter{tocdepth}{2}
 \tableofcontents
 \clearpage 
 
 % List of figures
 \setlength{\cftfigindent}{0em}
-% disable spacing between figure groups belonging to a chapter
-%\newcommand*{\noaddvspace}{\renewcommand*{\addvspace}[1]{}} 
-%\addtocontents{lof}{\protect\noaddvspace}
+\setlength{\cftbeforefigskip}{0.05in}
 \renewcommand{\listfigurename}{List of figures}
 \addcontentsline{toc}{chapter}{\listfigurename{}}
 \listoffigures
-
+\clearpage
 
 
 % \addcontentsline{toc}{chapter}{List of Tables}
@@ -116,7 +117,7 @@ footskip=0.3in]{geometry}
 % --------- End of Front Matter---------------------------------
 
 % ---------- Start of Chapters----------------------------------
-\clearpage
+
 \doublespacing
 \thispagestyle{plain}
 \setcounter{page}{1}

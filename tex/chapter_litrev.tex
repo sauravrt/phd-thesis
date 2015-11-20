@@ -14,14 +14,13 @@ found in classic references \cite{vtree2002oap,johnson1992array}.
 A sensor array is a collection of sensor elements arranged in a
 defined geometry. Sensor arrays are used to measure spatially
 propagating signals. Propagating signals could be electromagnetic,
-acoustic or geophysical in nature depending upon the application
-area. A propagating signal is a continuous space-time phenomena. The
+acoustic or geophysical in nature. A propagating signal is a continuous space-time phenomena. The
 sensor array samples the propagating signal at spatially discrete
 locations to generate discrete samples. This spatial sampling is
 analogous to the time sampling of continuous time (CT) signals to
 generate discrete sequence \cite{Oppenheim1989}. Array signal
-processing techniques process the sensor array measurements to filter
-the propagating signals in space \cite{johnson1992array, vtree2002oap}.
+processing techniques process the array measurement to filter
+the propagating signals \cite{johnson1992array, vtree2002oap}.
 
 % The sensor array measurement is
 % represented as an $N \times 1$ vector
@@ -121,7 +120,7 @@ focuses on beamforming for  narrowband planewave signals using a ULA with $d = \
 \begin{figure}[!hp]
  \centering
     \includegraphics[width=\textwidth]{ula_planewave.pdf}
-    \caption[Planewaves propagating across uniform linear array (ULA)]{Planewaves propagating across uniform linear array (ULA). The ULA has $N$ sensors (solid black circles) uniformly located at $d$ interval. The dashed arrow indicates planewave propagation direction which is expressed as angle $\theta_0$ w.r.t. the array axis. The direction along the array axis ($\theta = 0$) is called endfire and the direction perpendicular to the array axis ($\theta = \pi/2$) is called the broadside direction. The propagation time between two adjacent sensor is denoted by $\tau$.} 
+    \caption[Planewaves propagating across uniform linear array (ULA).]{Planewaves propagating across uniform linear array (ULA). The ULA has $N$ sensors (solid black circles) uniformly located at $d$ interval. The dashed arrow indicates planewave propagation direction which is expressed as angle $\theta_0$ w.r.t. the array axis. The direction along the array axis ($\theta = 0$) is called endfire and the direction perpendicular to the array axis ($\theta = \pi/2$) is called the broadside direction. The propagation time between two adjacent sensor is denoted by $\tau$.} 
  % Detailed descriptionof array geometry, broadside, endfire, bearing, axis, aperture
 \label{fig:ula-geom}
 \end{figure}
@@ -203,49 +202,58 @@ arriving from a specific look direction and suppressing interfering
 planewaves and noise. This operation is essentially spatial filtering
 of planewave signals analogous to band pass filtering of time domain
 signals where signals in a specific frequency band are allowed to pass
-though while signals outside the band are suppressed. \figurename{}~\ref{fig:beamformer} illustrates the
-beamforming operation on snapshot data obtained from a ULA. The beamformer applies a complex weight $w_n$ to
-each entry of the ULA snapshot vector and sums to produce a scalar
-output $ y = \wt^H\datavec$, where $\wt = [w_0, w_1, w_2\ldots w_{N-1}]^{T}$ is the beamformer weight vector.
-
+though while signals outside the band are
+suppressed. \figurename{}~\ref{fig:beamformer} illustrates the
+beamforming operation on snapshot data obtained from a ULA. The
+beamformer applies a complex weight $w_n$
+to each entry of the ULA snapshot vector and sums to produce a scalar
+output $ y = \wt^H\datavec$,
+where $\wt = [w_0, w_1, w_2\ldots w_{N-1}]^{T}$
+is the beamformer weight vector. The CBF is the basic beamformer
+applied to the ULA snapshot data. The CBF weights phase shifts each
+snapshot entries such that planewave signals from the look direction
+$\ulook$
+align in time and combine constructively while signals from other
+direction combine destructively and are suppressed. Hence, a CBF
+steered to the look direction $\ulook = \cos(\theta_0)$
+has a weight vector equal to the array manifold vector associated with
+the look direction, i.e., $\wcbf = \rep_0/N$.
 \begin{figure} \centering
     \includegraphics[width=0.7\linewidth]{beamforming}
-    \caption[Beamforming operation flow diagram]{Beamforming operation combines the frequency domain snapshot data with complex weights ($w_n$) to produce scalar output $\yt$.}
+    \caption[Beamforming operation
+      scales each sensor output with complex weights.]{Beamforming operation
+      scales each sensor output with complex weights ($w_n$) and
+      combines them to produce scalar output $\yt$. The beamformer
+      weights are analogous to FIR filter coefficients and determine
+      the spatial response.}
     \label{fig:beamformer}
 \end{figure}
-
-The CBF is the simplest beamformer applicable to ULA snapshot
-data. The CBF weight vector phase shifts the snapshot entries such
-that planewave signals from the look direction $\ulook$ align in time
-and combine constructively while other signals combine destructively
-and are suppressed. Hence, a CBF steered to the look direction
-$\ulook = \cos(\theta_0)$ has a weight vector equal to the array
-manifold vector associated with the look direction, i.e.,
-$\wcbf = \rep_0/N$.
-
 The beamformer weights are analogous to FIR filter coefficients. As
 the choice of the filter coefficients determines the frequency
 response of the FIR filter, the choice of the weight vector determines
-the spatial response of a beamformer for a given ULA. The beampattern
-defines the complex gain due to the beamformer for a unit amplitude
-planewave from direction $u = \cos(\theta)$, i.e.,
+the spatial frequency response of the beamformer for a given ULA. The
+beampattern defines the complex gain due to the beamformer for a unit
+amplitude planewave from direction $u = \cos(\theta)$, i.e.,
 \begin{equation}
   \label{eq:beampatu} 
   \beampatu = \wt^H\rep(u) = \sum_{n=0}^{N-1}w_n^*\left(\expo{-j(2\pi d /\lambda) u}\right)^n
 \end{equation}
 where $(\cdot)^*$ denotes conjugate and $-1 \leq u \leq 1$ is the
 directional cosine. \figurename{}~\ref{fig:cbf_bp} is the log
-magnitude of the CBF beampattern steered to the broadside
-($\ulook = 0$) look direction. The beampattern is characterized by a
-mainlobe in intended look direction and sidelobes outside the look
-direction. The main lobe allows the signal of interest to pass through
-while the sidelobes suppress noise and interfering signals. For a CBF
-steered to the broadside using $N$ sensor ULA, the mainlobe extends
-from $-2/N \leq u \leq 2/N$. Outside the mainlobe, the CBF beampattern
-has $N - 1$ nulls at $\Delta u = 2/N$ intervals \cite{vtree2002oap}.
+magnitude beampattern of a CBF implemented using $N = 11$ sensor ULA
+and steered to the broadside ($\ulook = 0$) look direction. The
+beampattern is characterized by a mainlobe in the look direction
+and multiple sidelobes outside the mainlobe. The mainlobe allows the
+signal of interest to pass through while the sidelobes suppress noise
+and interfering signals. For a CBF steered to the broadside using $N$
+sensor ULA, the mainlobe extends from $-2/N \leq u \leq 2/N$. Outside
+the mainlobe, the CBF beampattern has $N - 1$ nulls at
+$\Delta u = 2/N$ interval \cite{vtree2002oap}.
+
 \begin{figure} \centering
     \includegraphics[width=\textwidth]{cbfbeampattern}
-    \caption[CBF beampattern using $N=11$ sensor ULA]{Log magnitude of the CBF beampattern using an $N=11$
+    \caption[Log magnitude of the CBF beampattern using an $N=11$
+      sensors ULA.]{Log magnitude of the CBF beampattern using an $N=11$
       sensors ULA. The beamformer is steered towards the broadside
       ($\ulook=0$). The beampattern is characterized by a mainlobe in
       the look direction and sidelobes outside the look direction. The
@@ -267,6 +275,7 @@ based on measured snapshot data as discussed in \sect{}\ref{sec:abf}.
 
 \subsection{Signal model}
 \label{sec:signal-model}
+
 This section describes the measurement signal model used in this
 dissertation. The model assumes an environment consisting of multiple
 narrowband planewave signals in a spatially white background noise. In
@@ -344,7 +353,7 @@ power and consequently minimize output power.
 \begin{figure}[!hp]
  \centering
     \includegraphics[width=\textwidth]{mvdr_cbf_N11_bp_plot.pdf}
-    \caption[Ensemble MVDR ABF beampattern using $N=11$ sensor ULA]{Log magnitude beampattern (solid-blue) of the ensemble MVDR ABF using $N = 11$ sensor ULA. The vertical dotted line indicates a single narrowband planewave interferer present at $\uinter = 3/N$. The log magnitude beampattern for the CBF (dashed-black) using same ULA is shown for reference. The ensemble MVDR ABF places deep notch in the interferer direction compared to the CBF.} 
+    \caption[Log magnitude beampattern (solid-blue) of the ensemble MVDR ABF using $N = 11$ sensor ULA.]{Log magnitude beampattern (solid-blue) of the ensemble MVDR ABF using $N = 11$ sensor ULA. The vertical dotted line indicates a single narrowband planewave interferer present at $\uinter = 3/N$. The log magnitude beampattern for the CBF (dashed-black) using same ULA is shown for reference. The ensemble MVDR ABF places deep notch in the interferer direction compared to the CBF.} 
     \label{fig:mvdr-beampattern}
 \end{figure}
 
@@ -482,13 +491,13 @@ weights,
 {\bf \wts}_{\dl} = \frac{\sampCov_{\dl}\inv \replook}{\left(\replook\herm
 \sampCov_{\dl}\inv \replook \right)}.
 \end{equation*}
-Applying diagonal loading adds white noise power to the SCM. In
+Applying diagonal loading essentially adds white noise power to the SCM. In
 effect, the DL MVDR ABF weight vector is designed for a higher level
 white noise power than is actually present in the observed
-snapshot. Also, asymptotically as the DL factor increases such
-that $\dl \rightarrow \infty$, the DL SCM
-$\sampCov_\dl \approx \dl\eye$ and the DL MVDR ABF approaches the CBF
-\cite{vtree2002oap}.
+snapshot. As a result the DL MVDR ABF improves white noise suppression. Also, asymptotically as the DL factor increases such that
+$\dl \rightarrow \infty$,
+the DL SCM $\sampCov_\dl \approx \dl\eye$
+and the DL MVDR ABF approaches the CBF \cite{vtree2002oap}.
 
 In addition to enabling implementation of the SMI ABFs in a snapshot
 deficient scenario, diagonal loading also enables better WNG and
@@ -520,8 +529,9 @@ from the eigendecomposition of the SCM. The DMR ABF uses
 eigendecomposition to partition the SCM into a subspace containing the
 dominant eigenvectors and the orthogonal noise subspace. The dominant
 eigenvectors correspond to the interferers that the ABF has to
-suppress. In the structured estimate, the noise eigenvalues are replaced their average value \cite{vtree2002oap}.
-
+suppress. In the structured estimate, the noise eigenvalues are
+replaced their average value while keeping the dominant eigenvalues intact \cite{vtree2002oap}.
+\clearpage
 The DMR algorithm assumes the snapshot data includes $D$ planewave
 interferers plus colored noise, and white noise. The
 eigendecomposition of the SCM is
@@ -540,18 +550,14 @@ eigenvector,
 \sampCovdmr = \sum\limits_{n = 1}^{D} \sampeval_n\sampevec_n\sampevec_n\herm + \sum\limits_{n = D + 1}^{N} \noisepow\sampevec_n\sampevec_n\herm,
 \end{equation}
 where $\sampCovdmr$ is the estimated DMR SCM and $\noisepow$ is the
-estimated noise power
-\[
-\noisepow = \left( \frac{1}{N - D}\right)\sum\limits_{n = D + 1}^{N}\sampeval_n.
-\]
+estimated noise power $ \noisepow = (\sum\limits_{n = D + 1}^{N}\sampeval_n)/(N- D).$
 The DMR SCM is effectively approximating the measured noise field with
 a white noise field of power $\noisepow$.  The DMR ABF weight vector is simply
 the SMI MVDR weight vector \eqref{eq:smi-wt} with the SCM replaced by
-the DMR SCM $\sampCovdmr$
+the DMR SCM $\sampCovdmr$,
 \[
 \wdmr = (\sampCovdmr\inv\replook)/(\replook\herm\sampCovdmr\inv\replook).
 \]
-
 The DMR SCM in \eqref{eq:dmr-scm} assumes that the dominant subspace dimension $D$ is known. In practice the number of planewave signals present in the measurement is usually unknown. Hence the dominant space dimension needs to be estimated before the DMR SCM can be computed.
 
 % Also, using the estimated
@@ -559,7 +565,7 @@ The DMR SCM in \eqref{eq:dmr-scm} assumes that the dominant subspace dimension $
 % eigenvectors removes the small eigenvalues of the SCM that cause
 % problems with inverting the SCM.
 
-\section{Array Polynomials}
+\section{Array polynomials}
 \label{sec:array-poly}
 The beampattern of a planewave beamformer using a ULA can be
 represented as a complex polynomial

@@ -25,7 +25,7 @@ MVDR polynomial in terms of the zeros,
 \]
 where $G$ is a scaling level to ensure unity gain in the look
 direction ($\ulook = 0$), i.e., $\smipoly(\expo{j\pi\ulook}) = 1$ and $\sampz_n = r_ne^{j\omega_n}$ is the $n^{th}$ SMI MVDR
-polynomial zero. As previously discussed in Sec.~\ref{sec:mvdr-poly},
+polynomial zero. As previously discussed in \sect{}\ref{sec:smi-poly},
 the sample zeros are not necessarily on the unit circle
 and hence the magnitudes $|\sampz_n| = r_n$ of the roots are generally
 not unity. The next step is to radially project the SMI MVDR
@@ -47,8 +47,8 @@ main-lobe region ensures the UC MVDR main-lobe remains undistorted.
 \begin{figure}[!hp]
 \centering
 \includegraphics[width=0.9\textwidth]{ucmvdr_cartoon}  
-\caption[Schematic showing the unit circle projection
-technique]{Schematic shows the unit circle projection technique. The
+\caption[Schematic shows the unit circle projection
+technique.]{Schematic shows the unit circle projection technique. The
   diamond markers denote the sample zeros ($\sampz_n$) and the circle
   markers denote the unit circle zeros ($\ucz$) obtained by radially
   projecting the sample zeros. The sample zeros within the main-lobe
@@ -109,9 +109,8 @@ direction ($\ulook = 0$), i.e., $\ucpoly(\expo{j\pi\ulook}) = 1$.
 % UC MVDR beampattern still has nulls in the same locations as the
 % polynomial $\ucpoly(z)$.
 
-
 \figurename{} \ref{fig:smi-ucmvdr-plots} shows a representative
-example of the zero locations and the beampattern of a UC MVDR and the
+example comparing the UC MVDR and the
 SMI MVDR ABF using an $N = 11$ sensor ULA and $L = 12$ snapshots. Both
 ABFs are steered to broadside ($\ulook = 0$) look direction and a
 single interferer is present at $\uinter = \cos(\theta_I) = 3/N$. In
@@ -125,14 +124,14 @@ beampattern (dot-dash green). The lowering of the sidelobes reduces
 the area under the beampattern magnitude, which in turn improves the
 WNG of the UC MVDR as described by \eqref{eq:wng-beampat}.
 
-As discussed in Sec.~\ref{sec:mvdr-poly}, the SMI MVDR polynomial
+As discussed in \sect{}\ref{sec:smi-poly}, the SMI MVDR polynomial
 zeros are randomly perturbed in both magnitude and phase from the
 ensemble zero locations on the unit circle. Projecting the SMI MVDR
 polynomial zeros back on the unit circle corrects the magnitude
 perturbation in the sample zeros thereby satisfying the
-ensemble constraint of unit circle zeros. Moreover, the UC MVDR
+unit circle constraint on the ensemble zeros. Moreover, the UC MVDR
 weights can be seen as the closest approximation of SMI MVDR weights
-in the ensemble constraint space, i.e., on the unit circle.
+in the ensemble constrained space, i.e., on the unit circle.
 
 \begin{figure}[!hp]
 \centering
@@ -141,7 +140,7 @@ in the ensemble constraint space, i.e., on the unit circle.
 
 \subfloat[Log-magnitude beampattern]{\includegraphics[width=3.5in]{mvdr_smi_dl_zfc_N11_bpplot_eg}  \label{fig:smi-ucmvdr-bpplot}}
 \caption[Zero locations and log-magnitude beampatterns of a
-representative example of SMI MVDR and UC MVDR ABF] {Zero locations
+representative example of the SMI MVDR and the UC MVDR ABF.] {Zero locations
   and log-magnitude beampatterns of a representative example of SMI
   MVDR (blue) and UC MVDR ABF (magenta) using $N = 11$ sensor ULA for
   $L = 12$ snapshots and look direction $\ulook = 0$. The unit circle

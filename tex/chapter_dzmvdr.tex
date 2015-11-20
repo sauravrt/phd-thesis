@@ -1,4 +1,4 @@
-\chapter{Double zero MVDR ABF for notch broadening}
+\chapter{Double zero MVDR ABF}% for notch broadening}
 \label{ch:dzmvdr}
 ABFs encounter interferer direction mismatch because of interferer
 motion or limited sample support available to compute the SCM
@@ -18,8 +18,7 @@ behavior of ABF beampattern in the vicinity of a null.
 \sect{}\ref{sec:double-zero-mvdr} describes the DZ MVDR
 algorithm. \sect{}\ref{sec:results} presents results of experiments
 evaluating the DZ MVDR ABF in both stationary and moving interferer
-scenarios. The DZ MVDR ABF is compared with the SMI MVDR, the DL MVDR
-and the CMT MVDR ABF.
+scenarios. 
 
 \section{Interferer mismatch}
 \label{sec:interferer-mismatch}
@@ -139,11 +138,12 @@ given array aperture, i.e., $\cmtW = 2/(N-1)$ \cite{song2003null}.
 
 \begin{figure}[!ht]
   \centering
-\subfloat[]{\includegraphics[width=0.5\textwidth]{cmt_bp.pdf}\label{fig:cmt-bp}}
+\subfloat[]{\includegraphics[width=0.6\textwidth]{cmt_bp.pdf}\label{fig:cmt-bp}}
 
-\subfloat[]{\includegraphics[width=0.5\textwidth]{cmt_pz.pdf}\label{fig:cmt-pz}}
+\subfloat[]{\includegraphics[width=0.6\textwidth]{cmt_pz.pdf}\label{fig:cmt-pz}}
 
-\caption[Beampattern and polynomial zeros of CMT MVDR ABF implemented using $N = 11$ sensor ULA]{(a) Log-magnitude beampattern and (b) zeros of CMT MVDR ABF
+\caption[(a) Log-magnitude beampattern and (b) zeros of CMT MVDR ABF
+  using $N = 11$ sensor ULA and steered towards $\ulook = 0$.]{(a) Log-magnitude beampattern and (b) zeros of CMT MVDR ABF
   using $N = 11$ sensor ULA and steered towards $\ulook = 0$. The CMT
   notch width $\cmtW = 2/(N-1$). Two interferers are present at
   directions $\uinter = 3/N$ and $-5/N$ denoted by dashed vertical
@@ -173,7 +173,7 @@ more zeros per interferer are used to produce notch broadening. In the
 per interferer to produce broad notches. However, as seen in the
 beampattern the CMT MVDR ABF produces broad notches at the cost of
 high sidelobes and wider mainlobe which reduces the WNG
-[\sect{}~\ref{sec:wng}].
+[\sect{}\ref{sec:white-noise-gain}].
 
 \subsubsection{CMT as spatial modulation}
 \label{sec:cmt-as-spatial}
@@ -243,15 +243,15 @@ of freedom (DoF) per interferer to produce notch broadening.
   \centering
   \includegraphics[width=0.8\textwidth]{cmt_eigval_beam.pdf}
   \caption[Magnitude of eigenbeam for first two principal eigenvectors
-  of the sinc taper matrix]{Magnitude of eigenbeam for first two principal
-    eigenvectors of taper matrix in \eqn{}\eqref{eq:taper-mat}. The
-    eigenvectors spatially modulate the snapshots to create replica of
-    planewave signal in the snapshot on either side of the signal
-    direction.}
+  of the sinc taper matrix in \eqn{}\eqref{eq:taper-mat}.]{Magnitude
+    of eigenbeam for first two principal eigenvectors of the sinc
+    taper matrix in \eqn{}\eqref{eq:taper-mat}. The eigenvectors
+    spatially modulate the snapshots to create replica of planewave
+    signal in the snapshot on either side of the signal direction.}
   \label{fig:cmt-eigenbeam}
 \end{figure}
 
-\section{Properties of the beampattern near a  zero}
+\section{Properties of the beampattern near a zero}
 \label{sec:second-order-zeros}
 Evaluating the array polynomial \eqref{eq:beampat-poly} on the unit
 circle $z = e^{j\pi u}$ yields the beampattern in
@@ -291,7 +291,7 @@ broader notches in the MVDR beampattern.
   \centering
   \includegraphics[width=0.8\textwidth]{interf_single_dbl_zero_beampattern.pdf}
   \caption[MVDR beampattern magnitude zoomed into the neighborhood of
-    a null]{MVDR beampattern magnitude zoomed into the neighborhood of
+    a null.]{MVDR beampattern magnitude zoomed into the neighborhood of
     a null. The null location in directional cosine $u$ axis is
     denoted by the circle marker.  The vertical dashed line indicates
     the interferer direction. The blue solid curve denotes the first
